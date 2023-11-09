@@ -12,6 +12,12 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        anybody: ["var(--font-anybody)"],
+        roboto: ["var(--font-roboto)"],
+        inter: ["var(--font-inter)"],
+        rubik: ["var(--font-rubik)"]
+      },
     },
   },
   plugins: [],
