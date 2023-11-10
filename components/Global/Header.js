@@ -10,6 +10,7 @@ const Header = async () => {
         <LinkedText link="/" text="Home" />
         <LinkedText link="/products" text="Products" />
         <LinkedText link="/about" text="About" />
+        <LinkedText link="/dashboard" text="Dashboard" />
       </div>
       <div>
         <Image src="./logo.svg" height={125} width={125} alt="Brand Logo" />
