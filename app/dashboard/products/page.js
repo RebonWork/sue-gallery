@@ -23,6 +23,7 @@ const Page = () => {
         <h1>{prod.name}</h1>
         <h1>{prod.desc}</h1>
         <h1>{prod.price}</h1>
+        <img src={prod.image}/>
       </div>
     );
   }

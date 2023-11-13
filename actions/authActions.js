@@ -132,3 +132,8 @@ export async function resetPasswordWithCredentials({ token ,password }) {
     redirect(`/errors?error=${error.message}`);
   }
 }
+
+export async function isAdmin(){
+  const session = await getServerSession(authOptions);
+  console.log(session);
+}
