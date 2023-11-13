@@ -6,7 +6,7 @@ import LinkedText from "./LinkedText";
 const Header = async () => {
   return (
     <header className="header">
-      <div className="pages">
+      <div className="items">
         <LinkedText link="/" text="Home" />
         <LinkedText link="/products" text="Products" />
         <LinkedText link="/about" text="About" />
@@ -16,7 +16,7 @@ const Header = async () => {
         <Image src="./logo.svg" height={125} width={125} alt="Brand Logo" />
       </div>
 
-      <div>
+      <div className="items">
         <PersonIcon />
         <ShoppingCartIcon />
       </div>

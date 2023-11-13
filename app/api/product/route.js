@@ -13,37 +13,31 @@ export async function POST(req){
         return new Response("not premitted")
     }
 
-    var timestamp = Math.round((new Date).getTime()/1000);
-    
     try{
-        ////////////////////////////////////////////////// IMAGE UPLOAD\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         const data = await req.json()
-        const fileStr = data.image
-        const sendData = new FormData();
-        sendData.append("file",fileStr)
-        sendData.append("upload_preset","my-uploads")
-        const upload = await fetch("https://api.cloudinary.com/v1_1/sue-gallery/image/upload",{
+         const uploadedImageUrl = await fetch(`${process.env.NEXTAUTH_URL}/api/upload`,{
             method:"POST",
-            body: sendData
-        }).then(r=>r.json())
-        const imageUrl = upload.secure_url
+            body:JSON.stringify(data.image)
+          }).then(async response => await response.json());
 
-        ////////////////////////////////////////////////// SAVE TO DB\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-        const newProduct = new Product({...data,image:imageUrl})
+        const newProduct = new Product({...data,image:uploadedImageUrl})
         await newProduct.save()
-        return new Response("Ok")
+
+        return new Response(JSON.stringify({msg: "Product Added SuccessFully"}))
     } catch(err){
         console.error(err)
     }
 
 }
+
+
 export async function GET(){
     const session = await getServerSession(authOptions)
     if(!session){
         return new Response("not premitted")
     }
 
-    const products = await Product.find()
+    const products = await Product?.find()
     const dataSend = JSON.stringify(products)
     return new Response(dataSend)
 }

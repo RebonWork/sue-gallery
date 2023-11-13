@@ -5,8 +5,7 @@ import React from 'react'
 const page = () => {
   return (
     <>
-      <Link href={"/dashboard/products"}>Products</Link>
-      <SignOut/>
+      <h1>Analytics</h1>
     </>
 
   )

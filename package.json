@@ -19,6 +19,8 @@
     "axios": "^1.6.1",
     "base-64": "^1.0.0",
     "bcrypt": "^5.1.1",
+    "cloudinary": "^1.41.0",
+    "firebase": "^10.6.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0",
     "next": "14.0.1",

@@ -30,9 +30,26 @@ body {
   display: flex;
   justify-content: space-between;
   background-color: pink;
+  align-items: center;
+  padding: 10px 30px;
 }
 
-.header.pages{
+.header .items{
   display: flex;
-  gap: 5px;
+  gap: 25px;
+  color: white;
   }
+
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: large;
+}
+
+.dashboard-container{
+  display: flex;
+}
