@@ -4,23 +4,23 @@ import Form from "@/components/Global/Form";
 import React, { useState } from "react";
 
 const Page = () => {
-  const [encodedImage, setEncodedImage] = useState();
+  const [encodedImage, setEncodedImage] = useState([]);
 
   function encodeImage(event) {
-    // const images = event.target.files;
-    // [...images].map((image) => {
-    //   var reader = new FileReader();
-    //   reader.readAsDataURL(image);
-    //   reader.onload = async () => {
-    //     const dataUrl = reader.result;
-    //     await setEncodedImage((prev)=>[...prev,dataUrl]);
-    //   };
-    // });
+    const images = event.target.files;
+    [...images].map((image) => {
+      var reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = async () => {
+        const dataUrl = reader.result;
+        await setEncodedImage((prev)=>[...prev,dataUrl]);
+      };
+    });
 
-    const image = event.target.files[0];
-    var reader = new FileReader();
-    reader.readAsDataURL(image);
-    reader.onload = async () => await setEncodedImage(reader.result);
+    // const image = event.target.files[0];
+    // var reader = new FileReader();
+    // reader.readAsDataURL(image);
+    // reader.onload = async () => await setEncodedImage(reader.result);
   }
 
 
@@ -40,7 +40,7 @@ const Page = () => {
 
   return (
     <Form className="flex-col" action={handleAddProduct}>
-      <div>
+      {/* <div>
         <label htmlFor="product-name">Product Name</label>
         <input type="text" id="product-name" name="name" />
       </div>
@@ -51,7 +51,7 @@ const Page = () => {
       <div>
         <label htmlFor="product-price">Price</label>
         <input type="number" id="product-price" name="price" />
-      </div>
+      </div> */}
       <div>
         <label htmlFor="product-image">Upload Product Images</label>
         <input
@@ -61,6 +61,7 @@ const Page = () => {
           name="image"
           accept="image/*"
           onChange={encodeImage}
+          multiple
         />
       </div>
 

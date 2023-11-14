@@ -15,13 +15,17 @@ export async function POST(req){
 
     try{
         const data = await req.json()
-         const uploadedImageUrl = await fetch(`${process.env.NEXTAUTH_URL}/api/upload`,{
-            method:"POST",
-            body:JSON.stringify(data.image)
-          }).then(async response => await response.json());
+        const imagesUrl = data.image
+        const imageLinks =[]
 
-        const newProduct = new Product({...data,image:uploadedImageUrl})
-        await newProduct.save()
+        await imagesUrl.forEach(async (singleImage)=> {await fetch(`${process.env.NEXTAUTH_URL}/api/upload`,{
+            method:"POST",
+            body:JSON.stringify(singleImage)
+          }).then(async response => await imageLinks.push(response.json()) );
+          })
+
+        // const newProduct = new Product({...data,image:imageLinks})
+        // await newProduct.save()
 
         return new Response(JSON.stringify({msg: "Product Added SuccessFully"}))
     } catch(err){
