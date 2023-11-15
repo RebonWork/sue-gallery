@@ -11,11 +11,10 @@ const productSchema = new Schema(
       required: true,
     },
     price: {
-        type:Number,
-        required:true
+      type: Number,
+      required: true,
     },
-    image: String,
-    
+    images: [String],
   },
   { timestamps: true }
 );

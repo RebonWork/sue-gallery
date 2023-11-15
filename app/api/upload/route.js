@@ -27,7 +27,6 @@ export async function POST(req) {
       method: "POST",
       body: formData,
     }).then((r) => r.json());
-    console.log(upload.secure_url);
     return new Response(JSON.stringify(upload.secure_url));
   } catch (err) {
     console.error(err);
