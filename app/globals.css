@@ -53,3 +53,19 @@ body {
 .dashboard-container{
   display: flex;
 }
+
+.dashboard-product{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin: 30px;
+
+}
+.dashboard-image-container{
+  height: 80px;
+  width: 80px;
+}
+.dashboard-product-image{
+  object-fit: cover;
+  height: 100%;
+}
