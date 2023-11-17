@@ -69,3 +69,7 @@ body {
   object-fit: cover;
   height: 100%;
 }
+
+.click-icon{
+  cursor: pointer;
+}

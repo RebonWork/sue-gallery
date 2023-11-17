@@ -13,10 +13,8 @@ export async function POST(req) {
   const data = await req.json();
   const { id } = data;
   if (id) {
-    const product = await Product?.findById(id)
-    return new Response(
-      JSON.stringify(product)
-    )
+    const product = await Product?.findById(id);
+    return new Response(JSON.stringify(product));
   } else {
     try {
       const { name, desc, price } = data;
@@ -76,6 +74,29 @@ export async function DELETE(req) {
     await Product?.findOneAndDelete({ _id: id });
 
     return new Response(JSON.stringify("DELETED SUCCESS"));
+  } catch (err) {
+    console.error(err);
+  }
+}
+export async function PATCH(req) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return new Response("not premitted");
+  }
+
+  try {
+    const updateData = await req.json();
+    const {
+      id,
+      updateName: name,
+      updateDesc: desc,
+      updatePrice: price,
+    } = updateData;
+    await Product?.findByIdAndUpdate(
+      id,
+      { name: name, desc: desc, price: price })
+
+    return new Response(JSON.stringify({msg: "Product Updated SuccessFully"}));
   } catch (err) {
     console.error(err);
   }

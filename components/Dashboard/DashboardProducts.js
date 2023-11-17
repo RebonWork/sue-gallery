@@ -3,31 +3,33 @@
 import { useEffect, useState } from "react";
 import DashboardProductsCard from "./DashboardProductsCard";
 import { useRouter } from "next/navigation";
-
+import useSWR from "swr";
 
 const DashboardProducts = () => {
-  const [data, setData] = useState([]);
-  const router = useRouter()
-  async function getData() {
+  const router = useRouter();
+
+  const fetcher = async() => {
     const res = await fetch("/api/product", {
-      method: "GET",
-    });
+    method: "GET",
+  });
     const products = await res.json();
-    await setData(products);
+    return products 
   }
-  useEffect(() => {
-    getData();
+
+  const { data, error } = useSWR("/api/product", fetcher, {
+    refreshInterval: 1000,
   });
 
+
   async function deleteProduct(id) {
-    const res = await fetch("/api/product", {
+    await fetch("/api/product", {
       method: "DELETE",
       body: JSON.stringify(id),
     });
   }
 
-  function editProduct(id){
-    router.push(`/dashboard/products/${id}`)
+  function editProduct(id) {
+    router.push(`/dashboard/products/${id}`);
   }
 
   function handledata(prod) {
@@ -46,7 +48,7 @@ const DashboardProducts = () => {
   }
   return (
     <div>
-      <h1>{data.map(handledata)}</h1>
+      <h1>{data?.map(handledata)}</h1>
     </div>
   );
 };

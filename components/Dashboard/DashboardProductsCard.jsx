@@ -22,8 +22,8 @@ const DashboardProductsCard = (props) => {
         <h1>{props.price}</h1>
       </div>
       <div>
-        <DeleteForeverIcon onClick={()=>props.deleteProduct(props.id)}/>
-        <EditIcon onClick={()=>props.editProduct(props.id)}/>
+        <DeleteForeverIcon className="click-icon" onClick={()=>props.deleteProduct(props.id)}/>
+        <EditIcon className="click-icon" onClick={()=>props.editProduct(props.id)}/>
       </div>
     </div>
   );

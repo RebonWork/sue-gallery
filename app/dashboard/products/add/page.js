@@ -1,6 +1,7 @@
 "use client";
 
 import NewProductForm from "@/components/Dashboard/NewProductForm";
+import GoBackButton from "@/components/Global/GoBackButton";
 import SnackBar from "@/components/Global/SnackBar";
 
 import React, { useState } from "react";
@@ -13,7 +14,6 @@ const Page = () => {
   const [price, setPrice] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [message, setMessage] = useState("");
-
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -70,11 +70,12 @@ const Page = () => {
 
   return (
     <div>
+      <GoBackButton page="/dashboard/products" />
       <NewProductForm
         handleAddProduct={handleAddProduct}
-        handleName={(e)=>setName(e.target.value)}
-        handleDesc={(e)=>setDesc(e.target.value)}
-        handlePrice={(e)=>setPrice(e.target.value)}
+        handleName={(e) => setName(e.target.value)}
+        handleDesc={(e) => setDesc(e.target.value)}
+        handlePrice={(e) => setPrice(e.target.value)}
         encodeImage={encodeImage}
         name={name}
         desc={desc}
