@@ -1,9 +1,8 @@
-"use server";
 import Image from "next/image";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LinkedText from "./LinkedText";
-const Header = async () => {
+const Header = () => {
   return (
     <header className="header">
       <div className="items">

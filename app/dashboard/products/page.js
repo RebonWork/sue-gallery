@@ -1,14 +1,14 @@
 "use client";
 import DashboardProducts from "@/components/Dashboard/DashboardProducts";
 import Link from "next/link";
-const Page = () => {
 
+function Page() {
   return (
     <div>
       <Link href={"/dashboard/products/add"}>Add Products</Link>
-      <DashboardProducts/>
+      <DashboardProducts />
     </div>
   );
-};
+}
 
 export default Page;

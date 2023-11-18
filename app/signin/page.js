@@ -1,11 +1,5 @@
+import SignIn from "@/components/Auth/SignIn";
 
-import SignIn from '@/components/Auth/SignIn'
-import React from 'react'
-
-const SignInPage = ({searchParams : {callbackUrl}}) => {
-  return (
-    <SignIn callbackUrl={ callbackUrl || "/"}/>
-  )
+export default function Page({ searchParams: { callbackUrl } }) {
+  return <SignIn callbackUrl={callbackUrl || "/"} />;
 }
-
-export default SignInPage

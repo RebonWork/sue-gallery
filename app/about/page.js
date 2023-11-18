@@ -1,9 +1,5 @@
-import React from 'react'
+import Header from "@/components/Global/Header";
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
+export default function Page() {
+  return( <div><Header/></div>);
 }
-
-export default page

@@ -1,15 +1,11 @@
 "use client";
-import DashboardProductPage from "@/components/Dashboard/DashboardProductPage";
+import DashboardProduct from "@/components/Dashboard/DashboardSingleProduct";
 import { useParams } from "next/navigation";
 
-
-const Page = () => {
+function Page() {
   const { id } = useParams();
-
   
-  return <DashboardProductPage id={id}/>
-
-
-};
+  return <DashboardProduct id={id} />;
+}
 
 export default Page;

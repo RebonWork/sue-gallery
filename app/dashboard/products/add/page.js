@@ -2,7 +2,7 @@
 
 import NewProductForm from "@/components/Dashboard/NewProductForm";
 import GoBackButton from "@/components/Global/GoBackButton";
-import SnackBar from "@/components/Global/SnackBar";
+import Snackbar from "@/components/Global/Snackbar";
 
 import React, { useState } from "react";
 
@@ -15,7 +15,7 @@ const Page = () => {
   const [isOpen, setOpen] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleClose = (event, reason) => {
+  const handleClose = (event, reason) => { //closing Snackbar
     if (reason === "clickaway") {
       return;
     }
@@ -48,7 +48,7 @@ const Page = () => {
     }
   }
 
-  async function handleAddProduct() {
+  async function handleAddProduct() { //adding products
     const addProduct = await fetch("/api/product", {
       method: "POST",
       body: JSON.stringify({
@@ -58,14 +58,14 @@ const Page = () => {
         encodedImage,
         encodedCoverImage,
       }),
-    }).then(async (response) => await response.json());
+    }).then(async (response) => await response.json()); //Posting Data to Database and retrieving message "product added sucessfully"
 
-    if (addProduct?.msg) setMessage(addProduct.msg);
-    setName("");
-    setDesc("");
-    setPrice("");
-    setEncodedImage([]);
-    setOpen(true);
+    if (addProduct?.msg) setMessage(addProduct.msg); //setting the message for the SnackBar
+    setName(""); 
+    setDesc(""); 
+    setPrice(""); 
+    setEncodedImage([]); 
+    setOpen(true); //triggering Snackbar
   }
 
   return (
@@ -81,7 +81,7 @@ const Page = () => {
         desc={desc}
         price={price}
       />
-      <SnackBar
+      <Snackbar
         isOpen={isOpen}
         handleClose={handleClose}
         severity="success"

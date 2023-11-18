@@ -1,6 +1,4 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import DashboardProductsCard from "./DashboardProductsCard";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";

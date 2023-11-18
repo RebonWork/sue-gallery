@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import ProductSkeleton from "../Global/ProductSkelaton";
 import Form from "../Global/Form";
 import Button from "../Global/Button";
-import SnackBar from "../Global/SnackBar";
+import Snackbar from "../Global/Snackbar";
 import { DeleteForever } from "@mui/icons-material";
 import GoBackButton from "../Global/GoBackButton";
 
-const DashboardProductPage = (props) => {
+const DashboardProduct = (props) => {
   const id = props.id;
   const [isloading, setLoading] = useState(true);
   const [updateName, setUpdateName] = useState("");
@@ -19,22 +19,20 @@ const DashboardProductPage = (props) => {
   const [message, setMessage] = useState("");
   const [isOpen, setOpen] = useState(false);
 
-  async function getData() {
-    const res = await fetch("/api/product", {
-      method: "POST",
-      body: JSON.stringify({ id }),
-    }).then(async (response) => await response.json());
-    const { name, price, desc, cover, images } = res;
-    setUpdateName(name);
-    setUpdatePrice(price);
-    setUpdateDesc(desc);
-    setUpdateCover(cover);
-    setUpdateImages(images);
-
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function getData() {
+      const res = await fetch("/api/product", {
+        method: "POST",
+        body: JSON.stringify({ id }),
+      }).then(async (response) => await response.json());
+      const { name, price, desc, cover, images } = res;
+      setUpdateName(name);
+      setUpdatePrice(price);
+      setUpdateDesc(desc);
+      setUpdateCover(cover);
+      setUpdateImages(images);
+      setLoading(false);
+    }
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -58,24 +56,9 @@ const DashboardProductPage = (props) => {
     }
   }
 
-  function mapImages(image) {
-    return (
-      <>
-        <Image
-          className="dashboard-product-image"
-          src={image}
-          width={100}
-          height={100}
-          alt="product image"
-        />
-        <DeleteForever className="click-icon"/>
-      </>
-    );
-  }
-
   return (
     <div>
-    <GoBackButton page="/dashboard/products"/>
+      <GoBackButton page="/dashboard/products" />
       {isloading ? (
         <ProductSkeleton />
       ) : (
@@ -90,7 +73,22 @@ const DashboardProductPage = (props) => {
             />
             <DeleteForever className="click-icon" />
           </div>
-          <div className="flex gap-3">{updateImages.map(mapImages)}</div>
+          <div className="flex gap-3">
+            {updateImages.map((image) => {
+              return (
+                <>
+                  <Image
+                    className="dashboard-product-image"
+                    src={image}
+                    width={100}
+                    height={100}
+                    alt="product image"
+                  />
+                  <DeleteForever className="click-icon" />
+                </>
+              );
+            })}
+          </div>
 
           <h1>{id}</h1>
           <Form action={handleUpdate}>
@@ -116,7 +114,7 @@ const DashboardProductPage = (props) => {
           </Form>
         </div>
       )}
-      <SnackBar
+      <Snackbar
         isOpen={isOpen}
         handleClose={handleClose}
         severity="success"
@@ -126,4 +124,4 @@ const DashboardProductPage = (props) => {
   );
 };
 
-export default DashboardProductPage;
+export default DashboardProduct;
