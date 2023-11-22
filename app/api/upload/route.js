@@ -1,6 +1,7 @@
 "use server";
 
 
+
 export async function POST(req) {
 
     const cloudinary = require('cloudinary').v2;
@@ -27,8 +28,23 @@ export async function POST(req) {
       method: "POST",
       body: formData,
     }).then((r) => r.json());
-    return new Response(JSON.stringify(upload.secure_url));
+    const url=upload.secure_url
+    const publicID=upload.public_id
+    return new Response(JSON.stringify({url,publicID}));
   } catch (err) {
+    console.error(err);
+  }
+}
+
+
+export async function DELETE(req){
+  const cloudinary = require('cloudinary').v2;
+  require('../../../cloudinaryConfig');
+  const imageID = await req.json()
+  try{
+    cloudinary.uploader.destroy(imageID);
+    return new Response(JSON.stringify("Image Deleted Successfully"));
+  }catch(err){
     console.error(err);
   }
 }

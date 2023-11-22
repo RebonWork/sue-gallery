@@ -2,7 +2,7 @@ import React from 'react'
 import { Alert, Snackbar } from "@mui/material";
 
 
-const SnackBar = (props) => {
+const CustomSnackbar = (props) => {
   return (
     <Snackbar open={props.isOpen} autoHideDuration={6000} onClose={props.handleClose}>
     <Alert onClose={props.handleClose} severity={props.severity} sx={{ width: "100%" }}>
@@ -12,4 +12,4 @@ const SnackBar = (props) => {
   )
 }
 
-export default Snackbar
+export default CustomSnackbar

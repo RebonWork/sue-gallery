@@ -36,6 +36,17 @@ const NewProductForm = (props) => {
       />
     </div>
     <div>
+      <label htmlFor="product-cover">Upload Product Cover Photo</label>
+      <input
+        type="file"
+        id="product-cover"
+        style={{ display: "none" }}
+        name="cover"
+        accept="image/*"
+        onChange={props.encodeImage}
+      />
+    </div>
+    <div>
       <label htmlFor="product-image">Upload Product Images</label>
       <input
         type="file"
@@ -45,17 +56,6 @@ const NewProductForm = (props) => {
         accept="image/*"
         onChange={props.encodeImage}
         multiple
-      />
-    </div>
-    <div>
-      <label htmlFor="product-cover">Upload Product Cover Photo</label>
-      <input
-        type="file"
-        id="product-cover"
-        style={{ display: "none" }}
-        name="cover"
-        accept="image/*"
-        onChange={props.encodeImage}
       />
     </div>
     <Button value="Add Product" />

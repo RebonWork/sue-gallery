@@ -14,8 +14,14 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    cover: String,
-    images: [String],
+    cover: {
+      url:{type:String},
+      publicID:{type:String}
+    },
+    images: [{
+      url:{type:String},
+      publicID:{type:String}
+    }],
   },
   { timestamps: true }
 );

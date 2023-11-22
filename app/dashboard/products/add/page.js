@@ -1,8 +1,10 @@
 "use client";
 
+import { convertBase64 } from "@/actions/siteActions";
 import NewProductForm from "@/components/Dashboard/NewProductForm";
+import CustomSnackbar from "@/components/Global/CustomSnackbar";
 import GoBackButton from "@/components/Global/GoBackButton";
-import Snackbar from "@/components/Global/Snackbar";
+
 
 import React, { useState } from "react";
 
@@ -23,28 +25,19 @@ const Page = () => {
     setOpen(false);
   };
 
-  function encodeImage(event) {
+  async function encodeImage(event) {
     if (event?.target?.name === "image") {
       const images = event.target.files;
-      [...images].map((image) => {
-        var reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = async () => {
-          const dataUrl = reader.result;
-          await setEncodedImage((prev) => [...prev, dataUrl]);
-        };
+      [...images].map(async (image) => {
+        const imageUri = await convertBase64(image)
+        await setEncodedImage((prev) => [...prev, imageUri])
       });
     }
 
     if (event?.target?.name === "cover") {
-      const image = event.target.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(image);
-
-      reader.onload = async () => {
-        const dataUrl = reader.result;
-        await setEncodedCoverImage(dataUrl);
-      };
+      const cover = event.target.files[0];
+      const coverUri = await convertBase64(cover)
+      setEncodedCoverImage(coverUri)
     }
   }
 
@@ -65,7 +58,7 @@ const Page = () => {
     setDesc(""); 
     setPrice(""); 
     setEncodedImage([]); 
-    setOpen(true); //triggering Snackbar
+    setOpen(true);
   }
 
   return (
@@ -81,7 +74,7 @@ const Page = () => {
         desc={desc}
         price={price}
       />
-      <Snackbar
+      <CustomSnackbar
         isOpen={isOpen}
         handleClose={handleClose}
         severity="success"

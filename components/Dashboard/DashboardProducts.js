@@ -35,7 +35,7 @@ const DashboardProducts = () => {
       <DashboardProductsCard
         key={prod._id}
         id={prod._id}
-        cover={prod.cover}
+        cover={prod.cover? prod.cover.url : "/./no-photo.jpg"}
         name={prod.name}
         desc={prod.desc}
         price={prod.price}
