@@ -33,9 +33,6 @@ export async function uploadSingleImageClient(image) {
   }).then(async (response) => await response.json());
   return res
 }
-
-
-
 export async function convertBase64 (file) {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
