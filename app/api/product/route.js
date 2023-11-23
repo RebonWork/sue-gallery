@@ -88,7 +88,7 @@ export async function PATCH(req) {
       name,
       desc,
       price,
-      coverDate: cover,
+      coverData: cover,
       imagesData: images,
     } = updatedData;
 
