@@ -22,6 +22,15 @@ const productSchema = new Schema(
       url:{type:String},
       publicID:{type:String}
     }],
+    stock:{
+      type:String,
+      required:true
+    },
+    reviews:[{
+      userId:String,
+      comment:String,
+      rating:Number
+    }]
   },
   { timestamps: true }
 );

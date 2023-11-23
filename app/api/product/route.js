@@ -19,40 +19,22 @@ export async function POST(req) {
     return new Response(JSON.stringify(product));
   } else {
     try {
-      const { name, desc, price } = data;
-      const imagesUrl = data.encodedImage;
-      const coverImage = data.encodedCoverImage;
-      const images = [];
-      //////////Cover Image Uploader To Cloudinary
-      const cover = await fetch(`${process.env.NEXTAUTH_URL}/api/upload`, {
-        method: "POST",
-        body: JSON.stringify(coverImage),
-      }).then(async (response) => await response.json());
-      //////////////Product Image Uploader To Cloudinary
-      const imageUploader = imagesUrl.map(async (singleImage) => {
-        await fetch(`${process.env.NEXTAUTH_URL}/api/upload`, {
-          method: "POST",
-          body: JSON.stringify(singleImage),
-        }).then(async (response) => {
-          const imageData = await response.json();
-          const { url, publicID } = imageData;
-          await images.push({ url, publicID });
-        });
-      });
+      const { name, desc, price,stock, coverData: cover, imagesData:images } = data;
       //////////////////Saving Products To Monogo DB
-      return Promise.all(imageUploader).then(async () => {
-        const newProduct = new Product({
-          name,
-          desc,
-          price,
-          cover: cover,
-          images: images,
-        });
-        await newProduct.save();
-        return new Response(
-          JSON.stringify({ msg: "Product Added SuccessFully" })
-        );
+
+      const newProduct = new Product({
+        name,
+        desc,
+        price,
+        stock,
+        cover,
+        images,
       });
+      await newProduct.save();
+
+      return new Response(
+        JSON.stringify({ msg: "Product Added SuccessFully" })
+      );
     } catch (err) {
       console.error(err);
     }
@@ -79,9 +61,10 @@ export async function DELETE(req) {
     const id = await req.json();
     const product = await Product?.findById(id);
     const { cover, images } = product;
-    const deleteCover = deleteSingleImage(cover?.publicID)
-    const deleteImages = images.map((image)=> deleteSingleImage(image.publicID))
-
+    const deleteCover = deleteSingleImage(cover?.publicID);
+    const deleteImages = images.map((image) =>
+      deleteSingleImage(image.publicID)
+    );
 
     await Product?.findOneAndDelete({ _id: id });
 
