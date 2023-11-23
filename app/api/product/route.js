@@ -81,15 +81,17 @@ export async function PATCH(req) {
   }
 
   try {
-    const updateData = await req.json();
+    const updatedData = await req.json();
+
     const {
       id,
-      updateName: name,
-      updateDesc: desc,
-      updatePrice: price,
-      updateCover: cover,
-      updateImages: images,
-    } = updateData;
+      name,
+      desc,
+      price,
+      coverDate: cover,
+      imagesData: images,
+    } = updatedData;
+
     await Product?.findByIdAndUpdate(id, {
       name: name,
       desc: desc,

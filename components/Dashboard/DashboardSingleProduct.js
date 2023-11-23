@@ -13,11 +13,11 @@ import CustomSnackbar from "../Global/CustomSnackbar";
 const DashboardProduct = (props) => {
   const id = props.id;
   const [isloading, setLoading] = useState(true);
-  const [updateName, setUpdateName] = useState("");
-  const [updateDesc, setUpdateDesc] = useState("");
-  const [updatePrice, setUpdatePrice] = useState("");
-  const [updateCover, setUpdateCover] = useState("");
-  const [updateImages, setUpdateImages] = useState([]);
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [price, setPrice] = useState("");
+  const [coverDate, setCoverData] = useState("");
+  const [imagesData, setImagesData] = useState([]);
   const [message, setMessage] = useState("");
   const [isOpen, setOpen] = useState(false);
 
@@ -29,11 +29,11 @@ const DashboardProduct = (props) => {
       body: JSON.stringify({ id }),
     }).then(async (response) => await response.json());
     const { name, price, desc, cover, images } = res;
-    setUpdateName(name);
-    setUpdatePrice(price);
-    setUpdateDesc(desc);
-    setUpdateCover(cover);
-    setUpdateImages(images);
+    setName(name);
+    setPrice(price);
+    setDesc(desc);
+    setCoverData(cover);
+    setImagesData(images);
     setLoading(false);
   }
 
@@ -53,25 +53,25 @@ const DashboardProduct = (props) => {
 
   async function handleImageDelete(publicID) {
     deleteSingleImageClient(publicID)
-    setUpdateImages((prevImages) => {
+    setImagesData((prevImages) => {
       return prevImages.filter((images) => images.publicID  !== publicID);});
   }
 
   async function handleCoverDelete(){
-    await deleteSingleImageClient(updateCover.publicID)
-    setUpdateCover(null)
+    await deleteSingleImageClient(coverDate.publicID)
+    setCoverData(null)
   }
 
   async function handleCoverUpdate(event){
     const coverData = await uploadSingleImageClient(event.target.files[0])
-    setUpdateCover(coverData)
+    setCoverData(coverData)
   }
 
 async function handleImagesUpdate(event){
   const images = event.target.files
   for (const [key, value] of Object.entries(images)) {
     const imageData = await uploadSingleImageClient(value)
-    setUpdateImages((prev)=>[...prev, imageData])
+    setImagesData((prev)=>[...prev, imageData])
   }
 
   
@@ -80,7 +80,7 @@ async function handleImagesUpdate(event){
   async function handleUpdate() {
     const res = await fetch("/api/product", {
       method: "PATCH",
-      body: JSON.stringify({ id, updateName, updateDesc, updatePrice, updateCover, updateImages}),
+      body: JSON.stringify({ id, name, desc, price, coverDate, imagesData}),
     }).then(async (response) => await response.json());
     if (res?.msg) {
       setOpen(true);
@@ -99,10 +99,10 @@ async function handleImagesUpdate(event){
       ) : (
         <div>
           <div>
-          {updateCover? <div>
+          {coverDate? <div>
             <Image
               className="dashboard-product-image"
-              src={updateCover.url}
+              src={coverDate.url}
               width={100}
               height={100}
               alt="product image"
@@ -112,7 +112,7 @@ async function handleImagesUpdate(event){
 
           </div>
           <div className="flex gap-3">
-            {updateImages.map(handleImageData)}
+            {imagesData.map(handleImageData)}
             <input type="file" onChange={handleImagesUpdate} multiple/>
           </div>
 
@@ -121,20 +121,20 @@ async function handleImagesUpdate(event){
             <label htmlFor="name">Product Name</label>
             <input
               id="name"
-              value={updateName}
-              onChange={(e) => setUpdateName(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <label htmlFor="desc">Product Description</label>
             <input
               id="desc"
-              value={updateDesc}
-              onChange={(e) => setUpdateDesc(e.target.value)}
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
             />
             <label htmlFor="price">Product Price</label>
             <input
               id="price"
-              value={updatePrice}
-              onChange={(e) => setUpdatePrice(e.target.value)}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
             />
             <Button value="Update Product" />
           </Form>

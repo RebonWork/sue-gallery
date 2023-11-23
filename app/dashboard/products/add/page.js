@@ -36,7 +36,7 @@ const Page = () => {
   };
 
   async function handleCoverDelete() {
-    await deleteSingleImageClient(updateCover.publicID);
+    await deleteSingleImageClient(coverData.publicID);
     setCoverData(null);
   }
   async function handleUpload(event) {
@@ -50,7 +50,7 @@ const Page = () => {
 
     if (event?.target?.name === "cover") {
       const cover = await uploadSingleImageClient(event.target.files[0]);
-      setCoverData(cover)
+      setCoverData(cover);
     }
   }
 
@@ -89,8 +89,8 @@ const Page = () => {
     setDesc("");
     setPrice("");
     setStock("");
-    setCoverData("")
-    setImagesData([])
+    setCoverData("");
+    setImagesData([]);
     setOpen(true);
   }
 
@@ -139,7 +139,7 @@ const Page = () => {
             name="stock"
           />
         </div>
-        {coverData && (
+        {coverData ? (
           <div>
             <Image
               src={coverData?.url}
@@ -149,9 +149,21 @@ const Page = () => {
             />
             <DeleteForever onClick={handleCoverDelete} className="click-icon" />
           </div>
+        ) : (
+          <div>
+            <label htmlFor="product-cover">Upload Product Cover Photo</label>
+            <input
+              type="file"
+              id="product-cover"
+              style={{ display: "none" }}
+              name="cover"
+              accept="image/*"
+              onChange={handleUpload}
+            />
+          </div>
         )}
 
-        <div>
+        {/* <div>
           <label htmlFor="product-cover">Upload Product Cover Photo</label>
           <input
             type="file"
@@ -161,7 +173,7 @@ const Page = () => {
             accept="image/*"
             onChange={handleUpload}
           />
-        </div>
+        </div> */}
         {imagesData?.map(handleImageData)}
         <div>
           <label htmlFor="product-image">Upload Product Images</label>
