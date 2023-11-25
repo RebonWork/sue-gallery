@@ -16,7 +16,7 @@
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.17",
     "@mui/styled-engine-sc": "^6.0.0-alpha.5",
-    "axios": "^1.6.1",
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.0",
     "jsonwebtoken": "^9.0.2",
@@ -29,7 +29,8 @@
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.1",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

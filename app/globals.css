@@ -73,3 +73,7 @@ body {
 .click-icon{
   cursor: pointer;
 }
+
+.clickable{
+  cursor: pointer;
+}

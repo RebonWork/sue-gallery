@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SingleProductImage from "./SingleProductImage";
+import SingleProductImage from "../../../_components/SingleProductImage";
 import {
   deleteSingleImageClient,
   uploadSingleImageClient,
@@ -7,14 +7,20 @@ import {
 
 const ProductPhotos = (props) => {
   var imagesData = props.imagesData;
+  const[filesNum , setFilesNum] = useState(null)
+  const [isUploading, setUploading]= useState(false)
 
   async function handleImagesUpdate(event) {
     const images = event.target.files;
+    setUploading(true)
+    setFilesNum(images.length)
     for (const [key, value] of Object.entries(images)) {
       const result = await uploadSingleImageClient(value);
       imagesData = [...imagesData, result];
       props.setData(imagesData);
+      setFilesNum((prevNum)=> prevNum-1)
     }
+    setUploading(false)
   }
   async function handleImageDelete(publicID) {
     await deleteSingleImageClient(publicID);
@@ -34,7 +40,9 @@ const ProductPhotos = (props) => {
   return (
     <div className="flex gap-3">
       {imagesData?.map(handleImageData)}
-      <input type="file" onChange={handleImagesUpdate} multiple />
+      {isUploading&& Array.from({length: filesNum}).map((_item,index) => <h1 key={index}>Loading</h1>)}
+      <label className="clickable" htmlFor="product">Upload Product Photo</label>
+      <input id="product" type="file" onChange={handleImagesUpdate} style={{ display: "none" }} multiple />
     </div>
   );
 };

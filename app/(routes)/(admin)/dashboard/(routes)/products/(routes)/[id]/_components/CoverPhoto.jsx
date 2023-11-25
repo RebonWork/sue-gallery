@@ -4,14 +4,17 @@ import {
 } from "@/actions/siteActions";
 import { DeleteForever } from "@mui/icons-material";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const CoverPhoto = (props) => {
   const coverData = props.coverData;
+  const [isUploading, setUploading] = useState(false);
 
   async function handleCoverUpdate(event) {
-    const coverData = await uploadSingleImageClient(event.target.files[0]);
-    props.setData(coverData);
+    setUploading(true);
+    const coverData = await uploadSingleImageClient(event.target.files[0])
+    await props.setData(coverData);
+    setUploading(false)
   }
 
   async function handleCoverDelete() {
@@ -32,7 +35,16 @@ const CoverPhoto = (props) => {
           <DeleteForever onClick={handleCoverDelete} className="click-icon" />
         </div>
       ) : (
-        <input type="file" onChange={handleCoverUpdate} />
+        <>
+          {isUploading ? (
+            "uploading"
+          ) : (
+            <>
+            <label className="clickable" htmlFor="cover">Upload Cover Photo</label>
+            <input id="cover" type="file" style={{ display: "none" }} onChange={handleCoverUpdate} />
+            </>
+          )}
+        </>
       )}
     </div>
   );
