@@ -11,7 +11,7 @@ const SingleProductImage = (props) => {
       height={100}
       alt="product image"
     />
-    <DeleteForever onClick={()=> props.handleImageDelete(props.id)} className="click-icon" />
+    <DeleteForever onClick={()=> props.handleImageDelete(props.id)} className="clickable" />
   </>
   )
 }

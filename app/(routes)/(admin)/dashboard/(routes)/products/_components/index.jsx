@@ -1,4 +1,5 @@
 "use client";
+import { getData } from "@/actions/siteActions";
 import DashboardProductsCard from "./DashboardProductsCard";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
@@ -6,16 +7,8 @@ import useSWR from "swr";
 const DashboardProducts = () => {
   const router = useRouter();
 
-  const fetcher = async() => {
-    const res = await fetch("/api/product", {
-    method: "GET",
-  });
-    const products = await res.json();
-    return products 
-  }
-
-  const { data, error } = useSWR("/api/product", fetcher, {
-    refreshInterval: 1000,
+  const { data, error } = useSWR("/api/product", getData, {
+    refreshInterval: 2000,
   });
 
 

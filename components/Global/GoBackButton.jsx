@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 const GoBackButton = (props) => {
     const router = useRouter()
   return (
-    <ArrowBackIcon className='click-icon' onClick={()=>router.push(props.page)}/>
+    <ArrowBackIcon className='clickable' onClick={()=>router.push(props.page)}/>
   )
 }
 

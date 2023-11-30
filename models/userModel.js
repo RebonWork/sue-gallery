@@ -17,6 +17,23 @@ const userSchema = new Schema(
       type: String,
       default: "user",
     },
+    cartItemsId: [String],
+    address: {
+      street1: String,
+      street2: String,
+      city: String,
+      postcode: String,
+    },
+    wishlistItemsId: [String],
+    currentOrderID: String,
+    pastOrderID: [String],
+    reviews: [
+      {
+        productID: String,
+        rating: Number,
+        review: String,
+      },
+    ],
     provider: {
       type: String,
       default: "credential",

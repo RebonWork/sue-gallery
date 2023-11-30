@@ -1,26 +1,21 @@
 "use client";
+import { getData } from "@/actions/siteActions";
 import Header from "@/components/Global/Header";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import ProductSkeleton from "@/components/Global/ProductSkelaton";
+import { v4 } from "uuid";
 
 export default function Page() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/api/product", {
-        method: "GET",
-      });
-      const products = await res?.json();
-      console.log(products);
-      setData(products);
-    }
-    fetchData();
-  }, []);
+  useEffect(() => async ()=>setData(await getData()),[]);
+  useEffect(() => setLoading(false), [data]);
 
   function mapProducts(prod) {
     return (
-      <div>
+      <div key={v4()}>
         <Image
           src={prod.cover.url}
           height={80}
@@ -36,8 +31,8 @@ export default function Page() {
 
   return (
     <div>
-    <Header/>
-      {data?.map(mapProducts)}
+      <Header />
+      {loading ? <ProductSkeleton /> : data?.map(mapProducts)}
     </div>
   );
 }

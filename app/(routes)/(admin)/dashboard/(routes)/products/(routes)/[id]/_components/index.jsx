@@ -4,6 +4,7 @@ import ProductSkeleton from "@/components/Global/ProductSkelaton";
 import GoBackButton from "@/components/Global/GoBackButton";
 import CustomSnackbar from "@/components/Global/CustomSnackbar";
 import UpdateFields from "./UpdateFields";
+import { getDataByID } from "@/actions/siteActions";
 
 const UpdateSingleProduct = (props) => {
   const id = props.id;
@@ -11,17 +12,9 @@ const UpdateSingleProduct = (props) => {
   /*------------------------------States------------------------------*/
   const [isloading, setLoading] = useState(true);
   const [isOpen, setOpen] = useState(false);
-  const [data , setData] = useState({})
+  const [data, setData] = useState({});
 
   /*------------------------------Website Functions------------------------------*/
-  async function getData() {
-    const res = await fetch("/api/product", {
-      method: "POST",
-      body: JSON.stringify({ id }),
-    }).then(async (response) => await response.json());
-    setData(res);
-    setLoading(false)
-  }
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -30,18 +23,22 @@ const UpdateSingleProduct = (props) => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(
+    () => async () => {
+      setData(await getDataByID(id));
+      setLoading(false);
+    },
+    [id]
+  );
 
+  
   return (
     <div>
       <GoBackButton page="/dashboard/products" />
       {isloading ? (
         <ProductSkeleton />
       ) : (
-        <UpdateFields id={id} data={data} open={()=>setOpen(true)}/>
+        <UpdateFields id={id} data={data} open={() => setOpen(true)} />
       )}
       <CustomSnackbar
         isOpen={isOpen}

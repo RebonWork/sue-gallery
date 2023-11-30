@@ -1,4 +1,4 @@
-import Sidebar from "./(routes)/products/_components/Sidebar";
+import Sidebar from "./_components/Sidebar";
 import connectDB from "@/utils/database";
 
 export default function Layout({ children }) {

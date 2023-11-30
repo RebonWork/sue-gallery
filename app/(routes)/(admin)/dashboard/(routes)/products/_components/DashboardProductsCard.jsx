@@ -5,9 +5,9 @@ import EditIcon from "@mui/icons-material/Edit";
 const DashboardProductsCard = (props) => {
   return (
     <div className="dashboard-product">
-      <div className="dashboard-image-container">
+      <div className="image-container">
         <Image
-          className="dashboard-product-image"
+          className="product-image"
           src={props.cover}
           width={100}
           height={100}
@@ -22,11 +22,11 @@ const DashboardProductsCard = (props) => {
       </div>
       <div>
         <DeleteForeverIcon
-          className="click-icon"
+          className="clickable"
           onClick={() => props.deleteProduct(props.id)}
         />
         <EditIcon
-          className="click-icon"
+          className="clickable"
           onClick={() => props.editProduct(props.id)}
         />
       </div>
