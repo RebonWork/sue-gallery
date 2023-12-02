@@ -3,6 +3,7 @@ import Button from "@/components/Global/Button";
 import { useEffect, useState } from "react";
 import ProductPhotos from "./ProductPhotos";
 import CoverPhoto from "./CoverPhoto";
+import Editor from "../../add/_components/Editor/Editor";
 
 const UpdateFields = (props) => {
   const id = props.id;
@@ -19,6 +20,7 @@ const UpdateFields = (props) => {
   useEffect(() => {
     function dataSetting() {
       const { name, price, desc, cover, images } = props.data;
+      console.log(props.data);
       setName(name);
       setPrice(price);
       setDesc(desc);
@@ -49,27 +51,22 @@ const UpdateFields = (props) => {
         setData={(e) => setImagesData(e)}
       />
 
-      <Form action={handleSaveUpdate}>
+      <div>
         <label htmlFor="name">Product Name</label>
         <input
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <label htmlFor="desc">Product Description</label>
-        <input
-          id="desc"
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-        />
+        <Editor desc={desc} onChange={(data)=> {setDesc(data)}}/>
         <label htmlFor="price">Product Price</label>
         <input
           id="price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
-        <Button value="Update Product" />
-      </Form>
+        <button onClick={handleSaveUpdate}>Update Product</button>
+      </div>
     </div>
   );
 };
