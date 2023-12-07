@@ -4,7 +4,7 @@
 const Button = ({value,...props}) => {
     const { pending } = useFormStatus();
   return (
-    <button{...props} disabled={pending}>{ pending ? 'Loading...' : value}</button>
+    <button{...props} disabled={pending} type='submit'>{ pending ? 'Loading...' : value}</button>
   )
 }
 

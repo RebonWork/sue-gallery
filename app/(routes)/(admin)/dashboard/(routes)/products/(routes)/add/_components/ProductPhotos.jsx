@@ -34,7 +34,7 @@ const ProductPhotos = (props) => {
         handleImageDelete={handleImageDelete}
         id={images.publicID}
         imageUrl={images.url}
-        key={uuidv4()}
+        key={images.publicID}
       />
     );
   }

@@ -10,20 +10,15 @@ const UpdateFields = (props) => {
 
   /*------------------------------States------------------------------*/
 
-  const [name, setName] = useState("");
-  const [desc, setDesc] = useState("");
-  const [price, setPrice] = useState("");
+  const [form, setForm] = useState({name:"",desc:"",price:"",stock:""});
   const [coverData, setCoverData] = useState("");
   const [imagesData, setImagesData] = useState([]);
 
-  /*------------------------------Website Functions------------------------------*/
+  /*------------------------------Page Functions------------------------------*/
   useEffect(() => {
     function dataSetting() {
-      const { name, price, desc, cover, images } = props.data;
-      console.log(props.data);
-      setName(name);
-      setPrice(price);
-      setDesc(desc);
+      const { name, price, desc, stock, cover, images } = props.data;
+      setForm({ name, desc, price, stock });
       setCoverData(cover);
       setImagesData(images);
     }
@@ -32,6 +27,15 @@ const UpdateFields = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function handleKeyDown(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+    }
+  }
+  async function handleData(e) {
+    const name = e.target.name;
+    setForm({ ...form, [name]: e.target.value });
+  }
   async function handleSaveUpdate() {
     const res = await fetch("/api/product", {
       method: "PATCH",
@@ -43,7 +47,7 @@ const UpdateFields = (props) => {
   }
 
   return (
-    <div>
+    <Form action={handleSaveUpdate}>
       <CoverPhoto coverData={coverData} setData={(e) => setCoverData(e)} />
 
       <ProductPhotos
@@ -55,19 +59,36 @@ const UpdateFields = (props) => {
         <label htmlFor="name">Product Name</label>
         <input
           id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="name"
+          value={form.name}
+          onChange={handleData}
+          onKeyDown={handleKeyDown}
         />
-        <Editor desc={desc} onChange={(data)=> {setDesc(data)}}/>
+        <Editor
+          desc={form.desc}
+          onChange={(data) => {
+            setForm({desc:data});
+          }}
+        />
         <label htmlFor="price">Product Price</label>
         <input
           id="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          name="price"
+          value={form.price}
+          onChange={handleData}
+          onKeyDown={handleKeyDown}
         />
-        <button onClick={handleSaveUpdate}>Update Product</button>
+        <label htmlFor="stock">Stock</label>
+        <input
+          id="stock"
+          name="stock"
+          value={form.stock}
+          onChange={handleData}
+          onKeyDown={handleKeyDown}
+        />
+        <Button value="Update Product" />
       </div>
-    </div>
+    </Form>
   );
 };
 
