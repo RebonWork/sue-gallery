@@ -26,6 +26,10 @@ const Sidebar = () => {
         <MdOutlineShoppingCart />
         <h1>Orders</h1>
       </Link>
+      <Link className="sidebar-item" href={"/dashboard/category"}>
+        <MdPeopleOutline />
+        <h1>Category</h1>
+      </Link>
       <Link className="sidebar-item" href={"/dashboard/users"}>
         <MdPeopleOutline />
         <h1>Users</h1>

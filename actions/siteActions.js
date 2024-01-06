@@ -1,3 +1,8 @@
+
+import Category from "@/models/categorySchema";
+import connectDB from "@/utils/database";
+import { v4 } from "uuid";
+
 export async function deleteSingleImage(publicID) {
   const deleteCover = await fetch(`${process.env.NEXTAUTH_URL}/api/upload`, {
     method: "DELETE",
@@ -62,4 +67,12 @@ export async function getDataByID(id) {
   });
   const data = await res?.json();
   return data;
+}
+
+export async function getUsers() {
+  const res = await fetch(`/api/user`, {
+    method: "GET",
+  });
+  const foo = await res?.json();
+  console.log(foo);
 }

@@ -3,7 +3,6 @@ import Product from "@/models/productModel";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import connectDB from "@/utils/database";
-import { images } from "@/next.config";
 import { deleteSingleImage } from "@/actions/siteActions";
 
 connectDB();

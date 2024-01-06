@@ -9,7 +9,11 @@ const nextConfig = {
             pathname: '/sue-gallery/image/upload/**',
           },
         ],
-      }
+      },
+      experimental: {
+        appDir: true,
+        serverComponentsExternalPackages: ["mongoose"],
+      },
 }
 
 module.exports = nextConfig
