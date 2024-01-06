@@ -7,6 +7,7 @@ import CoverPhoto from "./CoverPhoto";
 import React, { useState } from "react";
 import InputFields from "./InputFields";
 import Form from "@/components/Global/Form";
+import DropdownCategory from "../../../_components/DropdownCategory";
 
 const AddProducts = () => {
   const [imagesData, setImagesData] = useState([]);
@@ -19,6 +20,7 @@ const AddProducts = () => {
   });
   const [isOpen, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [category, setCategory] = useState("")
 
   const handleClose = (event, reason) => {
     //closing Snackbar
@@ -32,7 +34,7 @@ const AddProducts = () => {
   async function handleAddProduct() {
     const addProduct = await fetch("/api/product", {
       method: "POST",
-      body: JSON.stringify({ ...form, coverData, imagesData }),
+      body: JSON.stringify({ ...form,category, coverData, imagesData }),
     }).then(async (response) => await response.json()); //Posting Data to Database and retrieving message "product added sucessfully"
     if (addProduct?.msg) setMessage(addProduct.msg); //setting the message for the SnackBar
     setForm({
@@ -43,6 +45,7 @@ const AddProducts = () => {
     });
     setCoverData("");
     setImagesData([]);
+    setCategory("")
     setOpen(true);
   }
 
@@ -70,6 +73,7 @@ const AddProducts = () => {
             imagesData={imagesData}
             setImagesData={(e) => setImagesData(e)}
           />
+          <DropdownCategory setCategory={(catg)=>setCategory(catg)}/>
           <Button value="Add Products" />
         </Form>
       </div>

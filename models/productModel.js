@@ -14,6 +14,10 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
     cover: {
       url:{type:String},
       publicID:{type:String}

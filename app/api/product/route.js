@@ -18,7 +18,8 @@ export async function POST(req) {
     return new Response(JSON.stringify(product));
   } else {
     try {
-      const { name, desc, price,stock, coverData: cover, imagesData:images } = data;
+      console.log(data);
+      const { name, desc, price,stock,category, coverData: cover, imagesData:images } = data;
       //////////////////Saving Products To Monogo DB
 
       const newProduct = new Product({
@@ -26,6 +27,7 @@ export async function POST(req) {
         desc,
         price,
         stock,
+        category,
         cover,
         images,
       });

@@ -1,5 +1,6 @@
 "use server"
 import Category from "@/models/categorySchema";
+import User from "@/models/userModel";
 
 export async  function getCategory(){
     const data = await Category?.find();
@@ -14,4 +15,14 @@ export async function addNewCategory(data) {
 export async function deleteCategory(id) {
     await Category.findOneAndDelete({_id:id})
     console.log("done");
+}
+
+export async function getUser(){
+    const data = await User?.find();
+    return JSON.stringify(data)
+}
+
+export async function updateUserRole({_id, newRole}){
+    await User.findByIdAndUpdate(_id,{role:newRole})
+    console.log("User Updated");
 }

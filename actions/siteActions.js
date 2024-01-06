@@ -68,11 +68,3 @@ export async function getDataByID(id) {
   const data = await res?.json();
   return data;
 }
-
-export async function getUsers() {
-  const res = await fetch(`/api/user`, {
-    method: "GET",
-  });
-  const foo = await res?.json();
-  console.log(foo);
-}

@@ -1,12 +1,12 @@
 "use client";
 import { addNewCategory } from "@/actions/serverActions";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CategoryList from "./_components/CategoryList";
 import { v4 } from "uuid";
 
 export default function Page() {
-  const [addcategory, setAddCategory] = useState("");
+  const addCategoryRef = useRef("")
 
 
   function handleKeyDown(event) {
@@ -17,7 +17,7 @@ export default function Page() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    addNewCategory(addcategory);
+    addNewCategory(addCategoryRef.current);
     console.log("added");
   }
 
@@ -29,9 +29,8 @@ export default function Page() {
         <label htmlFor="category">Add New</label>
         <input
           onKeyDown={handleKeyDown}
-          onChange={(e) => setAddCategory(e.target.value)}
+          onChange={(e) => addCategoryRef.current = e.target.value}
           id="category"
-          value={addcategory}
         />
         <button type="submit">+</button>
       </form>
