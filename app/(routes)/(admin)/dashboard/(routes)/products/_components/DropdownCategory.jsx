@@ -4,7 +4,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -12,19 +11,31 @@ import {
 import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 
-const DropdownCategory = ({setCategory}) => {
+const DropdownCategory = ({ setCategory, defaultValue}) => {
   const [categoryData, setCategoryData] = useState([]);
 
-useEffect(()=> async ()=>{
-    const res = JSON.parse(await getCategory())
-    setCategoryData(res)
-},[])
-  function handleData(categ){
-    return(<SelectItem key={v4()} value={categ.category}>{categ.category}</SelectItem>)
+  useEffect(() => {
+    const controller = new AbortController();
+    async function getCategoryData() {
+      const data = await getCategory();
+      const res = JSON.parse(data);
+      setCategoryData(res);
+    }
+    getCategoryData();
+    return () => {
+      controller.abort();
+    };
+  }, []);
+  function handleData(categ) {
+    return (
+      <SelectItem key={v4()} value={categ.category.toString()}>
+        {categ.category}
+      </SelectItem>
+    );
   }
 
   return (
-    <Select onValueChange={(value)=>setCategory(value)}>
+    <Select defaultValue={defaultValue} onValueChange={(value) => setCategory(value)}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select Category" />
       </SelectTrigger>

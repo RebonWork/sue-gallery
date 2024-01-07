@@ -5,6 +5,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdPeopleOutline } from "react-icons/md";
+import { BiCategoryAlt } from "react-icons/bi";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -27,7 +28,7 @@ const Sidebar = () => {
         <h1>Orders</h1>
       </Link>
       <Link className="sidebar-item" href={"/dashboard/category"}>
-        <MdPeopleOutline />
+        <BiCategoryAlt />
         <h1>Category</h1>
       </Link>
       <Link className="sidebar-item" href={"/dashboard/users"}>

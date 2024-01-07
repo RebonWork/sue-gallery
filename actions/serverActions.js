@@ -1,5 +1,6 @@
 "use server"
 import Category from "@/models/categorySchema";
+import Product from "@/models/productModel";
 import User from "@/models/userModel";
 
 export async  function getCategory(){
@@ -11,6 +12,10 @@ export async function addNewCategory(data) {
     const category = data
     const newCategory = new Category ({category})
     newCategory.save();
+}
+export async function updatedCategory({id,categoryUpdate,currentCategory}){
+    await Category.findByIdAndUpdate(id,{category:categoryUpdate})
+    await Product.updateMany({category: currentCategory}, {category:categoryUpdate} )
 }
 export async function deleteCategory(id) {
     await Category.findOneAndDelete({_id:id})

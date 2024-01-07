@@ -2,6 +2,7 @@ import { deleteCategory, getCategory } from "@/actions/serverActions";
 
 import React, { useEffect, useState } from "react";
 import CategoryItem from "./CategoryItem";
+import { v4 } from "uuid";
 
 const CategoryList = () => {
   const [categories, setCategory] = useState([]);
@@ -21,7 +22,7 @@ const CategoryList = () => {
   }
   function handelCatgData(catg) {
     return (
-      <CategoryItem name={catg.category} id={catg._id} deleteItem={deleteItem}/>
+      <CategoryItem key={v4()} category={catg.category} id={catg._id} deleteItem={deleteItem}/>
     );
   }
 

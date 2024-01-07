@@ -4,21 +4,29 @@ import { useEffect, useState } from "react";
 import ProductPhotos from "./ProductPhotos";
 import CoverPhoto from "./CoverPhoto";
 import Editor from "../../add/_components/Editor/Editor";
+import DropdownCategory from "../../../_components/DropdownCategory";
 
 const UpdateFields = (props) => {
   const id = props.id;
 
   /*------------------------------States------------------------------*/
 
-  const [form, setForm] = useState({name:"",desc:"",price:"",stock:""});
+  const [form, setForm] = useState({
+    name: "",
+    desc: "",
+    price: "",
+    stock: "",
+  });
   const [coverData, setCoverData] = useState("");
+  const [category, setCategory] = useState("");
   const [imagesData, setImagesData] = useState([]);
 
   /*------------------------------Page Functions------------------------------*/
   useEffect(() => {
     function dataSetting() {
-      const { name, price, desc, stock, cover, images } = props.data;
+      const { name, price, desc, stock, cover, images, category } = props.data;
       setForm({ name, desc, price, stock });
+      setCategory(category);
       setCoverData(cover);
       setImagesData(images);
     }
@@ -37,9 +45,19 @@ const UpdateFields = (props) => {
     setForm({ ...form, [name]: e.target.value });
   }
   async function handleSaveUpdate() {
+    const { name, desc, price,stock } = form;
     const res = await fetch("/api/product", {
       method: "PATCH",
-      body: JSON.stringify({ id, name, desc, price, coverData, imagesData }),
+      body: JSON.stringify({
+        id,
+        name,
+        desc,
+        stock,
+        price,
+        coverData,
+        imagesData,
+        category,
+      }),
     }).then(async (response) => await response.json());
     if (res?.msg) {
       props.open();
@@ -67,7 +85,7 @@ const UpdateFields = (props) => {
         <Editor
           desc={form.desc}
           onChange={(data) => {
-            setForm({desc:data});
+            setForm({ desc: data });
           }}
         />
         <label htmlFor="price">Product Price</label>
@@ -85,6 +103,10 @@ const UpdateFields = (props) => {
           value={form.stock}
           onChange={handleData}
           onKeyDown={handleKeyDown}
+        />
+        <DropdownCategory
+          setCategory={(categ) => setCategory(categ)}
+          defaultValue={props.data.category}
         />
         <Button value="Update Product" />
       </div>

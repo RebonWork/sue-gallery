@@ -21,7 +21,7 @@ const DashboardProductsCard = (props) => {
         <h1>{props.name}</h1>
       </div>
 
-      <h1>Catg</h1>
+      {props.categ? <h1>{props.categ}</h1> : <h1>No Category</h1>}
       <h1>{props.price} EGP</h1>
       <h1>{props.stock}</h1>
 

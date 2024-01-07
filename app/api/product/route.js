@@ -18,7 +18,6 @@ export async function POST(req) {
     return new Response(JSON.stringify(product));
   } else {
     try {
-      console.log(data);
       const { name, desc, price,stock,category, coverData: cover, imagesData:images } = data;
       //////////////////Saving Products To Monogo DB
 
@@ -83,14 +82,15 @@ export async function PATCH(req) {
 
   try {
     const updatedData = await req.json();
-
     const {
       id,
       name,
       desc,
       price,
+      stock,
       coverData: cover,
       imagesData: images,
+      category
     } = updatedData;
 
     await Product?.findByIdAndUpdate(id, {
@@ -98,7 +98,10 @@ export async function PATCH(req) {
       desc: desc,
       price: price,
       cover: cover,
+      stock:stock,
       images: images,
+      category:category
+
     });
 
     return new Response(

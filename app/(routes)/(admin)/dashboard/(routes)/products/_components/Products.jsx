@@ -22,6 +22,7 @@ const Products = ({ data }) => {
         cover={prod.cover ? prod.cover.url : "/./no-photo.jpg"}
         name={prod.name}
         desc={prod.desc}
+        categ={prod.category}
         price={prod.price}
         stock={prod.stock}
         deleteProduct={deleteProduct}
