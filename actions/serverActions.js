@@ -28,6 +28,11 @@ export async function getUser(){
 }
 
 export async function updateUserRole({_id, newRole}){
-    await User.findByIdAndUpdate(_id,{role:newRole})
-    console.log("User Updated");
+    try {
+        await User.findByIdAndUpdate(_id,{role:newRole})
+        return("User Successfully Updated")
+    } catch (error) {
+        return("Error Happened Please Try Again Later")
+    }
+
 }

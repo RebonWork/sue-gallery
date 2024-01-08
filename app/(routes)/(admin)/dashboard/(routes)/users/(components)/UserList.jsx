@@ -18,6 +18,7 @@ const UserList = () => {
   return (
     <div>
       {users.map(handleUserData)}
+      
     </div>
   );
 };
