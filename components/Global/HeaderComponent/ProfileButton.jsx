@@ -3,15 +3,14 @@ import { getSessionServer } from "@/actions/serverActions";
 import PersonIcon from "@mui/icons-material/Person";
 import Link from "next/link";
 import ProfileDropdown from "./ProfileDropdown";
-const ProfileButton =  () => {
-  async function getSession(){
+const ProfileButton = async () => {
+
     var data = await getSessionServer();
-    return data
-  }
-  const session = getSession();
+
+
   return (
     <div className="flex gap-x-4">
-      {session ? (
+      {data ? (
         <ProfileDropdown />
       ) : (
         <div>

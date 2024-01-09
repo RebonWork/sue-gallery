@@ -42,10 +42,10 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return new Response("not premitted");
-  }
+  // const session = await getServerSession(authOptions);
+  // if (!session) {
+  //   return new Response("not premitted");
+  // }
   const products = await Product?.find();
   const dataSend = JSON.stringify(products);
   return new Response(dataSend);
