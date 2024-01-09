@@ -5,6 +5,7 @@ import Form from "../../../../components/Global/Form";
 import Button from "../../../../components/Global/Button";
 import { ForgotPasswordWithCredentials } from "@/actions/authActions";
 
+
 const SignIn = ({ callbackUrl }) => {
 
   async function handelCredentialsLogin(formData){
@@ -20,7 +21,6 @@ const SignIn = ({ callbackUrl }) => {
   }
   return (
     <div>
-      <h2>Sign In With NextAuth</h2>
 
       {/*Google Login*/}
       <div style={{ margin: "30px 0" }}>

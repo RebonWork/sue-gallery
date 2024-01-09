@@ -1,7 +1,9 @@
 "use server";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Category from "@/models/categorySchema";
 import Product from "@/models/productModel";
 import User from "@/models/userModel";
+import { getServerSession } from "next-auth";
 
 export async function getCategory() {
   const data = await Category?.find();
@@ -54,4 +56,9 @@ export async function updateUserRole({ _id, newRole }) {
   } catch (error) {
     return "Error Happened Please Try Again Later";
   }
+}
+
+export async function getSessionServer(){
+  const session = await getServerSession(authOptions)
+  return session
 }
