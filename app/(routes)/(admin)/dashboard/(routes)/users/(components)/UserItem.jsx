@@ -7,7 +7,7 @@ import { updateUserRole } from "@/actions/serverActions";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useToast } from "@/components/ui/use-toast";
 
-const UserItem = ({ data }) => {
+const UserItem = ({ data,editUser }) => {
   const { toast } = useToast()
   const [editable, setEditable] = useState(false);
   const { name, provider, email, role, _id } = data;
@@ -28,8 +28,8 @@ const UserItem = ({ data }) => {
   }
 
   return (
-    <div className=" bg-slate-100 m-6" key={v4()}>
-      <h1>{name}</h1>
+    <div className=" bg-slate-100 m-6 flex gap-x-5" key={v4()}>
+      <h1 className="clickable" onClick={()=>editUser(_id)}>{name}</h1>
       <h1>{email}</h1>
       <h1>{provider}</h1>
       {editable ? (

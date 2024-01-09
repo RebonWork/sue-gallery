@@ -2,7 +2,9 @@ import { useRouter } from "next/navigation";
 import DashboardProductsCard from "./DashboardProductsCard";
 
 const Products = ({ data }) => {
+  
   const router = useRouter();
+
   async function deleteProduct(id) {
     await fetch("/api/product", {
       method: "DELETE",
