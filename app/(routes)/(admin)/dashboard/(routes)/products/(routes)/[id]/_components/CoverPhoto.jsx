@@ -24,7 +24,7 @@ const CoverPhoto = (props) => {
   return (
     <div>
       {coverData ? (
-        <div>
+        <div className="product-cover">
           <Image
             className="dashboard-product-image"
             src={coverData.url}

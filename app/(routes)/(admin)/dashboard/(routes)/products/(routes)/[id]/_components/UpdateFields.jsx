@@ -1,5 +1,5 @@
 import Form from "@/components/Global/Form";
-import Button from "@/components/Global/Button";
+import FormButton from "@/components/Global/Button";
 import { useEffect, useState } from "react";
 import ProductPhotos from "./ProductPhotos";
 import CoverPhoto from "./CoverPhoto";
@@ -45,7 +45,7 @@ const UpdateFields = (props) => {
     setForm({ ...form, [name]: e.target.value });
   }
   async function handleSaveUpdate() {
-    const { name, desc, price,stock } = form;
+    const { name, desc, price, stock } = form;
     const res = await fetch("/api/product", {
       method: "PATCH",
       body: JSON.stringify({
@@ -65,52 +65,62 @@ const UpdateFields = (props) => {
   }
 
   return (
-    <Form action={handleSaveUpdate}>
-      <CoverPhoto coverData={coverData} setData={(e) => setCoverData(e)} />
+    <div className="add-product-container">
+      <Form className="form" action={handleSaveUpdate}>
+        <div className="picture-container">
+          <div className="image-container">
+            <ProductPhotos
+              imagesData={imagesData}
+              setData={(e) => setImagesData(e)}
+            />
+          </div>
+          <div className="cover-container">
+            <CoverPhoto
+              coverData={coverData}
+              setData={(e) => setCoverData(e)}
+            />
+          </div>
+        </div>
 
-      <ProductPhotos
-        imagesData={imagesData}
-        setData={(e) => setImagesData(e)}
-      />
-
-      <div>
-        <label htmlFor="name">Product Name</label>
-        <input
-          id="name"
-          name="name"
-          value={form.name}
-          onChange={handleData}
-          onKeyDown={handleKeyDown}
-        />
-        <Editor
-          desc={form.desc}
-          onChange={(data) => {
-            setForm({ desc: data });
-          }}
-        />
-        <label htmlFor="price">Product Price</label>
-        <input
-          id="price"
-          name="price"
-          value={form.price}
-          onChange={handleData}
-          onKeyDown={handleKeyDown}
-        />
-        <label htmlFor="stock">Stock</label>
-        <input
-          id="stock"
-          name="stock"
-          value={form.stock}
-          onChange={handleData}
-          onKeyDown={handleKeyDown}
-        />
-        <DropdownCategory
-          setCategory={(categ) => setCategory(categ)}
-          defaultValue={props.data.category}
-        />
-        <Button value="Update Product" />
-      </div>
-    </Form>
+        <div className="input-container">
+          <label htmlFor="name">Product Name</label>
+          <input
+            id="name"
+            name="name"
+            value={form.name}
+            onChange={handleData}
+            onKeyDown={handleKeyDown}
+          />
+          <Editor
+            desc={form.desc}
+            onChange={(data) => {
+              setForm({ desc: data });
+            }}
+          />
+          <label htmlFor="price">Product Price</label>
+          <input
+            id="price"
+            name="price"
+            value={form.price}
+            onChange={handleData}
+            onKeyDown={handleKeyDown}
+          />
+          <label htmlFor="stock">Stock</label>
+          <input
+            id="stock"
+            name="stock"
+            value={form.stock}
+            onChange={handleData}
+            onKeyDown={handleKeyDown}
+          />
+          <DropdownCategory
+            setCategory={(categ) => setCategory(categ)}
+            defaultValue={props.data.category}
+          />
+          <FormButton value="Update Product" />
+        </div>
+      </Form>
+    </div>
   );
 };
 

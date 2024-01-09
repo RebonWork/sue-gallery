@@ -1,4 +1,5 @@
 import React from "react";
+import { getSessionServer } from "@/actions/serverActions";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +13,8 @@ import DashboardLink from "./DashboardLink";
 import { CircleUserRound } from "lucide-react";
 import SignOut from "@/app/(routes)/(auth)/_component/SignOut";
 import Link from "next/link";
-const ProfileDropdown = () => {
+const ProfileDropdown = async () => {
+  const session = await getSessionServer();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -25,9 +27,12 @@ const ProfileDropdown = () => {
           <CircleUserRound className="mr-2 h-4 w-4" />
           <Link href="/profile">Profile</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <DashboardLink />
-        </DropdownMenuItem>
+        {session?.user.role === "admin" && (
+          <DropdownMenuItem>
+            <DashboardLink />
+          </DropdownMenuItem>
+        )}
+
         <DropdownMenuItem>
           <SignOut />
         </DropdownMenuItem>

@@ -1,5 +1,5 @@
 import { ChangePasswordWithCredentials } from "@/actions/authActions"
-import Button from "@/components/Global/Button"
+import FormButton from "@/components/Global/Button";
 import Form from "@/components/Global/Form"
 
 const ChangePassword = () => {
@@ -16,7 +16,7 @@ const ChangePassword = () => {
         <Form action={handleChangePassword}>
             <input type="password" name="old_pass" placeholder="Old Password" required/>
             <input type="password" name="new_pass" placeholder="New Password" required/>
-            <Button value="Change Password"/>
+            <FormButton value="Change Password"/>
         </Form>
     </div>
   )

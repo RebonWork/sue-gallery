@@ -1,4 +1,4 @@
-import Button from "@/components/Global/Button";
+import FormButton from "@/components/Global/Button";
 import CustomSnackbar from "@/components/Global/CustomSnackbar";
 import GoBackButton from "@/components/Global/GoBackButton";
 import ProductPhotos from "./ProductPhotos";
@@ -20,7 +20,7 @@ const AddProducts = () => {
   });
   const [isOpen, setOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("");
 
   const handleClose = (event, reason) => {
     //closing Snackbar
@@ -34,7 +34,7 @@ const AddProducts = () => {
   async function handleAddProduct() {
     const addProduct = await fetch("/api/product", {
       method: "POST",
-      body: JSON.stringify({ ...form,category, coverData, imagesData }),
+      body: JSON.stringify({ ...form, category, coverData, imagesData }),
     }).then(async (response) => await response.json()); //Posting Data to Database and retrieving message "product added sucessfully"
     if (addProduct?.msg) setMessage(addProduct.msg); //setting the message for the SnackBar
     setForm({
@@ -45,7 +45,7 @@ const AddProducts = () => {
     });
     setCoverData("");
     setImagesData([]);
-    setCategory("")
+    setCategory("");
     setOpen(true);
   }
 
@@ -55,26 +55,34 @@ const AddProducts = () => {
   }
 
   return (
-    <div>
+    <div className=" w-full">
       <GoBackButton page="/dashboard/products" />
-      <div className="flex-col">
-        <Form action={handleAddProduct}>
-          <InputFields
-            form={form}
-            handleData={handleData}
-            setForm={setForm}
-            desc={form.desc}
-          />
-          <CoverPhoto
-            coverData={coverData}
-            setCoverData={(e) => setCoverData(e)}
-          />
-          <ProductPhotos
-            imagesData={imagesData}
-            setImagesData={(e) => setImagesData(e)}
-          />
-          <DropdownCategory setCategory={(catg)=>setCategory(catg)}/>
-          <Button value="Add Products" />
+      <div className="add-product-container">
+        <Form className="form" action={handleAddProduct}>
+          <div className="picture-container">
+            <div className="image-container">
+              <ProductPhotos
+                imagesData={imagesData}
+                setImagesData={(e) => setImagesData(e)}
+              />
+            </div>
+            <div className="cover-container">
+              <CoverPhoto
+                coverData={coverData}
+                setCoverData={(e) => setCoverData(e)}
+              />
+            </div>
+          </div>
+          <div className="input-container">
+            <InputFields
+              form={form}
+              handleData={handleData}
+              setForm={setForm}
+              desc={form.desc}
+            />
+            <DropdownCategory setCategory={(catg) => setCategory(catg)} />
+            <FormButton value="Add Products" />
+          </div>
         </Form>
       </div>
       <CustomSnackbar

@@ -7,8 +7,8 @@ const SingleProductImage = (props) => {
     <Image
       className="dashboard-product-image"
       src={props.imageUrl}
-      width={100}
-      height={100}
+      width={500}
+      height={500}
       alt="product image"
     />
     <DeleteForever onClick={()=> props.handleImageDelete(props.id)} className="clickable" />

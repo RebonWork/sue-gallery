@@ -1,6 +1,6 @@
 "use client"
 import { resetPasswordWithCredentials } from "@/actions/authActions"
-import Button from "@/components/Global/Button"
+import FormButton from "@/components/Global/Button";
 import Form from "@/components/Global/Form"
 
 const ResetPasswordComponent = ({token}) => {
@@ -16,7 +16,7 @@ const ResetPasswordComponent = ({token}) => {
         <h1>Reset Password</h1>
         <Form action={handleResetPassword}>
             <input type="password" name="password" placeholder="Password" required/>
-            <Button value="Reset Password"/>
+            <FormButton value="Reset Password"/>
         </Form>
     </div>
   )

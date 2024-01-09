@@ -15,31 +15,35 @@ const CoverPhoto = (props) => {
   }
 
   async function handleUpload(event) {
-    setUpload(true)
+    setUpload(true);
     const cover = await uploadSingleImageClient(event.target.files[0]);
     await props.setCoverData(cover);
-    setUpload(false)
+    setUpload(false);
   }
 
   return (
     <>
       {props.coverData ? (
-        <div>
+        <div className="product-cover">
           <Image
             src={props.coverData?.url}
-            width={50}
-            height={50}
+            width={500}
+            height={500}
             alt="cover photo"
           />
           <DeleteForever onClick={handleCoverDelete} className="click-icon" />
         </div>
       ) : (
-        <div>
+        <div className="product-cover">
           {isUploading ? (
             <h1>Uploading</h1>
           ) : (
             <>
-              <label htmlFor="product-cover">Upload Product Cover Photo</label>
+              <label htmlFor="product-cover">
+                <div className=" upload-cover">
+                  <h1>Upload Your Cover Photo</h1>
+                </div>
+              </label>
               <input
                 type="file"
                 id="product-cover"

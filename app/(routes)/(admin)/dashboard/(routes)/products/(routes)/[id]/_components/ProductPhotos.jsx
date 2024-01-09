@@ -40,7 +40,7 @@ const ProductPhotos = (props) => {
     );
   }
   return (
-    <div className="flex gap-3">
+    <div className="product-images">
       {imagesData?.map(handleImageData)}
       {isUploading &&
         Array.from({ length: filesNum }).map((_item, index) => (

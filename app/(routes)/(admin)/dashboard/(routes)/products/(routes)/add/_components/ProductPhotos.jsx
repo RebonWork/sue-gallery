@@ -39,7 +39,7 @@ const ProductPhotos = (props) => {
     );
   }
   return (
-    <div>
+    <div className="product-images">
       {props.imagesData?.map(handleImageData)}
       {isUploading &&
         Array.from({ length: filesNum }).map((_item, index) => (

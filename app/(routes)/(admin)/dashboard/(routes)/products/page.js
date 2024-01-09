@@ -3,6 +3,7 @@ import DashboardProducts from "./_components";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 
+
 function Page() {
   return (
     <div className="product-container">
@@ -11,6 +12,7 @@ function Page() {
         <Link className="add-button" href={"/dashboard/products/add"}><FaPlus/><h1>Add Products</h1></Link>
       </div>
       <DashboardProducts />
+
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function Layout({ children }) {
   return (
     <div className="dashboard-container">
       <Sidebar />
-      <main>{children}</main>
+      {children}
       <Toaster />
     </div>
   );

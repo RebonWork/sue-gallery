@@ -1,12 +1,12 @@
 import Image from "next/image";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
+import { Trash2 } from 'lucide-react';
+import { Pencil } from 'lucide-react';
+import DeleteButton from "./DeleteButton";
 
 const DashboardProductsCard = (props) => {
   return (
-    <>
-      <h1>{props.id}</h1>
-
+    <div className="card-container">
       <div className="product">
         <div className="image-container">
           <Image
@@ -26,16 +26,14 @@ const DashboardProductsCard = (props) => {
       <h1>{props.stock}</h1>
 
       <div className="icons">
-        <EditIcon
+        <Pencil
           className="clickable edit"
           onClick={() => props.editProduct(props.id)}
         />
-        <DeleteForeverIcon
-          className="clickable delete"
-          onClick={() => props.deleteProduct(props.id)}
-        />
+
+        <DeleteButton deleteProduct={() => props.deleteProduct(props.id)}/>
       </div>
-    </>
+    </div>
   );
 };
 
