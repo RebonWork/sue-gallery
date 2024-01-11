@@ -1,10 +1,10 @@
 import Form from "@/components/Global/Form";
 import FormButton from "@/components/Global/Button";
 import { useEffect, useState } from "react";
-import ProductPhotos from "./ProductPhotos";
-import CoverPhoto from "./CoverPhoto";
-import Editor from "../../add/_components/Editor/Editor";
+import ProductPhotos from "./../../add/_components/ProductPhotos";
+import CoverPhoto from "./../../add/_components/CoverPhoto";
 import DropdownCategory from "../../../_components/DropdownCategory";
+import InputFields from "../../add/_components/InputFields";
 
 const UpdateFields = (props) => {
   const id = props.id;
@@ -32,18 +32,13 @@ const UpdateFields = (props) => {
     }
 
     dataSetting();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.data]);
 
-  function handleKeyDown(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-    }
-  }
   async function handleData(e) {
     const name = e.target.name;
     setForm({ ...form, [name]: e.target.value });
   }
+
   async function handleSaveUpdate() {
     const { name, desc, price, stock } = form;
     const res = await fetch("/api/product", {
@@ -53,10 +48,10 @@ const UpdateFields = (props) => {
         name,
         desc,
         stock,
+        category,
         price,
         coverData,
         imagesData,
-        category,
       }),
     }).then(async (response) => await response.json());
     if (res?.msg) {
@@ -65,61 +60,48 @@ const UpdateFields = (props) => {
   }
 
   return (
-    <div className="add-product-container">
-      <Form className="form" action={handleSaveUpdate}>
-        <div className="picture-container">
-          <div className="image-container">
-            <ProductPhotos
-              imagesData={imagesData}
-              setData={(e) => setImagesData(e)}
-            />
+    <div className="w-full">
+      <div className="add-product-container">
+        <Form className="form" action={handleSaveUpdate}>
+          <div className="picture-container">
+            <div className="image-container">
+              <h3 className="scroll-m-20 text-l font-semibold tracking-tight">
+                Update Product Photos
+              </h3>
+              <ProductPhotos
+                imagesData={imagesData}
+                setImagesData={(e) => setImagesData(e)}
+              />
+            </div>
+            <div className="cover-container">
+              <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                Update Product Cover
+              </h3>
+              <CoverPhoto
+                coverData={coverData}
+                setCoverData={(e) => setCoverData(e)}
+              />
+            </div>
           </div>
-          <div className="cover-container">
-            <CoverPhoto
-              coverData={coverData}
-              setData={(e) => setCoverData(e)}
-            />
-          </div>
-        </div>
 
-        <div className="input-container">
-          <label htmlFor="name">Product Name</label>
-          <input
-            id="name"
-            name="name"
-            value={form.name}
-            onChange={handleData}
-            onKeyDown={handleKeyDown}
-          />
-          <Editor
-            desc={form.desc}
-            onChange={(data) => {
-              setForm({ desc: data });
-            }}
-          />
-          <label htmlFor="price">Product Price</label>
-          <input
-            id="price"
-            name="price"
-            value={form.price}
-            onChange={handleData}
-            onKeyDown={handleKeyDown}
-          />
-          <label htmlFor="stock">Stock</label>
-          <input
-            id="stock"
-            name="stock"
-            value={form.stock}
-            onChange={handleData}
-            onKeyDown={handleKeyDown}
-          />
-          <DropdownCategory
-            setCategory={(categ) => setCategory(categ)}
-            defaultValue={props.data.category}
-          />
-          <FormButton value="Update Product" />
-        </div>
-      </Form>
+          <div className="input-container">
+            <InputFields
+              form={form}
+              handleData={handleData}
+              setForm={setForm}
+              desc={form.desc}
+            />
+            <div className="input-area">
+              <DropdownCategory
+                setCategory={(categ) => setCategory(categ)}
+                defaultValue={props.data.category}
+                currentValue={category? category:props.data.category}
+              />
+            </div>
+            <FormButton value="Update Products" />
+          </div>
+        </Form>
+      </div>
     </div>
   );
 };

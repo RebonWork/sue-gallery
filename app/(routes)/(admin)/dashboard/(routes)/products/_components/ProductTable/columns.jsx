@@ -32,7 +32,16 @@ export const columns = [
     accessorKey: "cover.url",
     header: "Images",
     cell: (row) => (
-      <Image src={row.getValue()} width={50} height={50} alt="productPhoto" />
+      <Image
+        src={
+          row.getValue()
+            ? row.getValue()
+            : "https://res.cloudinary.com/sue-gallery/image/upload/v1701958658/my-uploads/hec05pmiytesjmzrtmnv.jpg"
+        }
+        width={75}
+        height={75}
+        alt="productPhoto"
+      />
     ),
   },
   {
@@ -78,9 +87,9 @@ export const columns = [
     },
     cell: ({ row }) => {
       const stock = row.getValue("stock");
-      console.log(typeof stock);
       return <div>{stock}</div>;
     },
+    sortingFn: "alphanumeric"
   },
   {
     accessorKey: "price",
@@ -98,11 +107,11 @@ export const columns = [
   },
   {
     accessorKey: "_id",
-    header: "Actions",
-    enableHiding: false,
+    header: ()=> <h1 className="flex justify-center">Actions</h1>,
+    // enableHiding: false,
     cell: (row) => {
       return (
-        <div className=" flex">
+        <div className=" icons">
           <DeleteButton _id={row.getValue("_id")} />
           <EditButton _id={row.getValue("_id")} />
         </div>

@@ -4,6 +4,7 @@ import Image from 'next/image'
 const SingleProductImage = (props) => {
   return (
     <>
+    <div></div>
     <Image
       className="dashboard-product-image"
       src={props.imageUrl}
@@ -11,7 +12,7 @@ const SingleProductImage = (props) => {
       height={500}
       alt="product image"
     />
-    <DeleteForever onClick={()=> props.handleImageDelete(props.id)} className="clickable" />
+
   </>
   )
 }

@@ -1,13 +1,15 @@
 import FormButton from "@/components/Global/Button";
-import CustomSnackbar from "@/components/Global/CustomSnackbar";
+import { useToast } from "@/components/ui/use-toast";
 import GoBackButton from "@/components/Global/GoBackButton";
 import ProductPhotos from "./ProductPhotos";
 import CoverPhoto from "./CoverPhoto";
+import { Divider } from "@nextui-org/react";
 
 import React, { useState } from "react";
 import InputFields from "./InputFields";
 import Form from "@/components/Global/Form";
 import DropdownCategory from "../../../_components/DropdownCategory";
+import PageLeader from "@/app/(routes)/(admin)/dashboard/_components/PageLeader";
 
 const AddProducts = () => {
   const [imagesData, setImagesData] = useState([]);
@@ -18,25 +20,14 @@ const AddProducts = () => {
     price: "",
     stock: "",
   });
-  const [isOpen, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const { toast } = useToast();
   const [category, setCategory] = useState("");
 
-  const handleClose = (event, reason) => {
-    //closing Snackbar
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   async function handleAddProduct() {
-    const addProduct = await fetch("/api/product", {
+    await fetch("/api/product", {
       method: "POST",
       body: JSON.stringify({ ...form, category, coverData, imagesData }),
     }).then(async (response) => await response.json()); //Posting Data to Database and retrieving message "product added sucessfully"
-    if (addProduct?.msg) setMessage(addProduct.msg); //setting the message for the SnackBar
     setForm({
       name: "",
       desc: "",
@@ -46,7 +37,10 @@ const AddProducts = () => {
     setCoverData("");
     setImagesData([]);
     setCategory("");
-    setOpen(true);
+    toast({
+      description: "Product Successfully Added",
+      variant: "success",
+    });
   }
 
   async function handleData(e) {
@@ -56,17 +50,23 @@ const AddProducts = () => {
 
   return (
     <div className=" w-full">
-      <GoBackButton page="/dashboard/products" />
+      <PageLeader>Add Product</PageLeader>
       <div className="add-product-container">
         <Form className="form" action={handleAddProduct}>
           <div className="picture-container">
             <div className="image-container">
+              <h3 className="scroll-m-20 text-  l font-semibold tracking-tight">
+                Add Product Photos
+              </h3>
               <ProductPhotos
                 imagesData={imagesData}
                 setImagesData={(e) => setImagesData(e)}
               />
             </div>
             <div className="cover-container">
+              <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                Add Product Cover
+              </h3>
               <CoverPhoto
                 coverData={coverData}
                 setCoverData={(e) => setCoverData(e)}
@@ -80,17 +80,17 @@ const AddProducts = () => {
               setForm={setForm}
               desc={form.desc}
             />
-            <DropdownCategory setCategory={(catg) => setCategory(catg)} />
+            <div className="input-area">
+              <DropdownCategory
+                defaultValue={category}
+                currentValue={category}
+                setCategory={(catg) => setCategory(catg)}
+              />
+            </div>
             <FormButton value="Add Products" />
           </div>
         </Form>
       </div>
-      <CustomSnackbar
-        isOpen={isOpen}
-        handleClose={handleClose}
-        severity="success"
-        message={message}
-      />
     </div>
   );
 };

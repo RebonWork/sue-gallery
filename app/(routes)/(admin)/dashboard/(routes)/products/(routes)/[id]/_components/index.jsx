@@ -2,26 +2,19 @@
 import React, { useEffect, useState } from "react";
 import ProductSkeleton from "@/components/Global/ProductSkelaton";
 import GoBackButton from "@/components/Global/GoBackButton";
-import CustomSnackbar from "@/components/Global/CustomSnackbar";
+import { useToast } from "@/components/ui/use-toast";
 import UpdateFields from "./UpdateFields";
 import { getDataByID } from "@/actions/siteActions";
+import PageLeader from "@/app/(routes)/(admin)/dashboard/_components/PageLeader";
 
 const UpdateSingleProduct = (props) => {
   const id = props.id;
 
   /*------------------------------States------------------------------*/
   const [isloading, setLoading] = useState(true);
-  const [isOpen, setOpen] = useState(false);
   const [data, setData] = useState({});
-
+  const { toast } = useToast();
   /*------------------------------Website Functions------------------------------*/
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
 
   useEffect(
     () => async () => {
@@ -29,23 +22,25 @@ const UpdateSingleProduct = (props) => {
       setLoading(false);
     },
     [id]
-  );
+  )
 
-  
   return (
     <div>
-      <GoBackButton page="/dashboard/products" />
+      <PageLeader>Update Product</PageLeader>
       {isloading ? (
         <ProductSkeleton />
       ) : (
-        <UpdateFields id={id} data={data} open={() => setOpen(true)} />
+        <UpdateFields
+          id={id}
+          data={data}
+          open={() =>
+            toast({
+              description: "Product Successfully Updated",
+              variant: "success",
+            })
+          }
+        />
       )}
-      <CustomSnackbar
-        isOpen={isOpen}
-        handleClose={handleClose}
-        severity="success"
-        message={"Product Updated Successfully"}
-      />
     </div>
   );
 };

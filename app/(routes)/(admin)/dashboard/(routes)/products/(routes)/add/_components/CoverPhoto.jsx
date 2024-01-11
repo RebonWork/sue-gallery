@@ -2,9 +2,11 @@ import {
   deleteSingleImageClient,
   uploadSingleImageClient,
 } from "@/actions/siteActions";
+import { PlusCircle } from "lucide-react";
 import { DeleteForever } from "@mui/icons-material";
 import Image from "next/image";
 import React, { useState } from "react";
+import { Spinner } from "@nextui-org/react";
 
 const CoverPhoto = (props) => {
   const [isUploading, setUpload] = useState(false);
@@ -24,24 +26,26 @@ const CoverPhoto = (props) => {
   return (
     <>
       {props.coverData ? (
-        <div className="product-cover">
-          <Image
-            src={props.coverData?.url}
-            width={500}
-            height={500}
-            alt="cover photo"
-          />
-          <DeleteForever onClick={handleCoverDelete} className="click-icon" />
+        <div>
+          <div className="product-cover">
+            <Image
+              src={props.coverData?.url}
+              width={600}
+              height={600}
+              alt="cover photo"
+            />
+          </div>
+          <DeleteForever onClick={handleCoverDelete} className="clickable" />
         </div>
       ) : (
         <div className="product-cover">
           {isUploading ? (
-            <h1>Uploading</h1>
+            <Spinner size="lg" color="default" labelColor="foreground" />
           ) : (
             <>
               <label htmlFor="product-cover">
                 <div className=" upload-cover">
-                  <h1>Upload Your Cover Photo</h1>
+                  <PlusCircle className="add-icon clickable" />
                 </div>
               </label>
               <input

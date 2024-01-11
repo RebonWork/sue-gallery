@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 
-const DropdownCategory = ({ setCategory, defaultValue}) => {
+const DropdownCategory = ({ setCategory, defaultValue,currentValue }) => {
   const [categoryData, setCategoryData] = useState([]);
 
   useEffect(() => {
@@ -28,24 +28,33 @@ const DropdownCategory = ({ setCategory, defaultValue}) => {
   }, []);
   function handleData(categ) {
     return (
-      <SelectItem key={v4()} value={categ.category.toString()}>
-        {categ.category}
-      </SelectItem>
+      <>
+        <SelectItem key={v4()} value={categ.category.toString()}>
+          {categ.category}
+        </SelectItem>
+      </>
     );
   }
 
   return (
-    <Select defaultValue={defaultValue} onValueChange={(value) => setCategory(value)}>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select Category" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectItem value="null">None</SelectItem>
-          {categoryData.map(handleData)}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <>
+    <h2>Select Product Category</h2>
+      <Select
+        defaultValue={defaultValue}
+        value={currentValue}
+        onValueChange={(value) => setCategory(value)}
+      >
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select Category" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value="null">None</SelectItem>
+            {categoryData.map(handleData)}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </>
   );
 };
 

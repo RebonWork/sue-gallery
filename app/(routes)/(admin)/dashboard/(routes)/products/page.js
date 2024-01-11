@@ -2,6 +2,8 @@
 import DashboardProducts from "./_components";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
+import DeleteButton from "./_components/DeleteButton";
+import EditButton from "./_components/ProductTable/EditButton";
 
 
 function Page() {

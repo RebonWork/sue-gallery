@@ -9,12 +9,14 @@ const InputFields = ({ form, handleData, setForm, desc }) => {
   }
   return (
     <>
-      <div>
+      <div className="input-area">
         <label htmlFor="product-name">Product Name</label>
         <input
+          autoComplete="off"
           type="text"
           value={form.name}
           onChange={handleData}
+          className="input-field"
           id="product-name"
           name="name"
           onKeyDown={handleKeyDown}
@@ -26,10 +28,11 @@ const InputFields = ({ form, handleData, setForm, desc }) => {
           setForm({ ...form, desc });
         }}
       />
-      <div>
+      <div className="input-area">
         <label htmlFor="product-price">Price</label>
         <input
           type="number"
+          className="input-field"
           value={form.price}
           onChange={handleData}
           id="product-price"
@@ -37,9 +40,10 @@ const InputFields = ({ form, handleData, setForm, desc }) => {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <div>
+      <div className="input-area">
         <label htmlFor="product-stock">Stock</label>
         <input
+          className="input-field"
           type="number"
           value={form.stock}
           onChange={handleData}

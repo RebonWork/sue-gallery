@@ -1,19 +1,67 @@
 .add-product-container
+    margin-top: 20px
+    padding: 20px
     .form
         display: flex
         flex-direction: row
         gap: 10px
     .picture-container
         display: flex
+        gap: 12px
         flex-direction: row
-        width: 33%
+        width: 50%
         .image-container
             width: 33%
             .product-images
-                background-color: #d8d8d8
+                display: flex
+                justify-content: center
+                align-items: center
+                border-radius: 20px
+                background-color: #ebebeb
+                height: 250px
+                box-shadow: 5px 5px 38px -24px rgba(0,0,0,0.25)
+                overflow: hidden
+                .add-icon
+                    width: 50px
+                    height: 50px
         .cover-container
             width: 67%
             .product-cover
-                background-color: #d8d8d8
+                display: flex
+                justify-content: center
+                align-items: center
+                border-radius: 20px
+                background-color: #ebebeb
+                height: 600px
+                box-shadow: 5px 5px 38px -24px rgba(0,0,0,0.25)
+                overflow: hidden
+                .add-icon
+                    width: 100px
+                    height: 100px
+
     .input-container
-        width: 67%
+        width: 50%
+        margin: 20px
+        display: flex
+        flex-direction: column
+        gap: 14px
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button
+            -webkit-appearance: none
+            appearance: none
+        input[type=number]
+            -moz-appearance: textfield
+
+        .input-area
+            display: flex
+            flex-direction: column
+            .input-field
+                background-color: #ebebeb
+                height: 26px
+                border-radius: 6px
+            #product-name
+                width: 26rem
+            #product-stock
+                width: 8rem
+            #product-price
+                width: 8rem

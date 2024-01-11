@@ -1,11 +1,11 @@
 import React from 'react'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const GoBackButton = (props) => {
     const router = useRouter()
   return (
-    <ArrowBackIcon className='clickable' onClick={()=>router.push(props.page)}/>
+    <ArrowLeft  className='clickable w-8 h-8' onClick={()=>router.push(props.page)}/>
   )
 }
 

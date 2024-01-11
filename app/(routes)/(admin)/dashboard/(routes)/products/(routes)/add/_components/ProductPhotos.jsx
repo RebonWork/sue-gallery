@@ -5,6 +5,9 @@ import {
   uploadSingleImageClient,
 } from "@/actions/siteActions";
 import { v4 as uuidv4 } from "uuid";
+import { Spinner } from "@nextui-org/react";
+import { PlusCircle } from "lucide-react";
+import { DeleteForever } from "@mui/icons-material";
 
 const ProductPhotos = (props) => {
   const [filesNum, setFilesNum] = useState(null);
@@ -13,7 +16,7 @@ const ProductPhotos = (props) => {
   async function handleUpload(event) {
     const images = event.target.files;
     setUploading(true);
-    setFilesNum(images.length)
+    setFilesNum(images.length);
     for (const [key, value] of Object.entries(images)) {
       const imageData = await uploadSingleImageClient(value);
       props.setImagesData((prev) => [...prev, imageData]);
@@ -30,34 +33,49 @@ const ProductPhotos = (props) => {
 
   function handleImageData(images) {
     return (
-      <SingleProductImage
-        handleImageDelete={handleImageDelete}
-        id={images.publicID}
-        imageUrl={images.url}
-        key={images.publicID}
-      />
+      <div className="mb-6">
+        <div className="product-images">
+          <SingleProductImage
+            handleImageDelete={handleImageDelete}
+            imageUrl={images.url}
+            key={images.publicID}
+          />
+        </div>
+        <DeleteForever
+          onClick={() => handleImageDelete(images.publicID)}
+          className="clickable"
+        />
+      </div>
     );
   }
   return (
-    <div className="product-images">
-      {props.imagesData?.map(handleImageData)}
-      {isUploading &&
-        Array.from({ length: filesNum }).map((_item, index) => (
-          <h1 key={index}>Loading</h1>
-        ))}
+    <>
       <div>
-        <label htmlFor="product-image">Upload Product Images</label>
-        <input
-          type="file"
-          id="product-image"
-          style={{ display: "none" }}
-          name="image"
-          accept="image/*"
-          onChange={handleUpload}
-          multiple
-        />
+        {props.imagesData?.map(handleImageData)}
+        {isUploading &&
+          Array.from({ length: filesNum }).map((_item, index) => (
+            <div className="mb-6" key={index}>
+              <div className="product-images">
+                <Spinner size="lg" color="default" labelColor="foreground" />
+              </div>
+            </div>
+          ))}
+        <div className="product-images">
+          <label htmlFor="product-image">
+            <PlusCircle className="add-icon clickable" />
+          </label>
+          <input
+            type="file"
+            id="product-image"
+            style={{ display: "none" }}
+            name="image"
+            accept="image/*"
+            onChange={handleUpload}
+            multiple
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
