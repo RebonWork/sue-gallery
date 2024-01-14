@@ -1,5 +1,5 @@
 import Image from "next/image";
-import DeleteButton from "../DeleteButton";
+import DeleteButton from "./DeleteButton";
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";

@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 
-const DropdownCategory = ({ setCategory, defaultValue,currentValue }) => {
+const DropdownCategory = ({ value, onChange}) => {
   const [categoryData, setCategoryData] = useState([]);
 
   useEffect(() => {
@@ -38,11 +38,9 @@ const DropdownCategory = ({ setCategory, defaultValue,currentValue }) => {
 
   return (
     <>
-    <h2>Select Product Category</h2>
       <Select
-        defaultValue={defaultValue}
-        value={currentValue}
-        onValueChange={(value) => setCategory(value)}
+        value={value}
+        onValueChange={onChange}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select Category" />

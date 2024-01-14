@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import EditorActions from "./EditorActions";
 import { useEffect } from "react";
 
-const Editor = ({ onChange, desc }) => {
+const Editor = ({ onChange, description, isSubmitSuccessful,value }) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -24,23 +24,21 @@ const Editor = ({ onChange, desc }) => {
         class: "text-box",
       },
     },
+    content: description,
     onUpdate({ editor }) {
-      onChange(editor.getHTML());
+      value = onChange(editor.getHTML());
     },
   });
 
-  if (desc === "") {
-    editor?.commands.setContent(desc);
-  }
-
   useEffect(() => {
-    editor?.commands.setContent(desc);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor]);
+    if (isSubmitSuccessful) {
+      editor?.commands.setContent("");
+    }
+  }, [isSubmitSuccessful, editor]);
+
 
   return (
     <div className="editor">
-      <h1>Description</h1>
       <EditorActions editor={editor} />
       <EditorContent editor={editor} />
     </div>

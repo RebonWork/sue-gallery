@@ -1,9 +1,11 @@
 "use client";
 
-import AddProducts from "./_components";
+import AddProductForm from "./_components/add-product";
 
 const Page = () => {
-  return <AddProducts />;
+  return <>
+    <AddProductForm/>
+  </>;
 };
 
 export default Page;

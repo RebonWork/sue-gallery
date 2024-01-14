@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import SingleProductImage from "../../../_components/SingleProductImage";
+import SingleProductImage from "./SingleProductImage";
 import {
   deleteSingleImageClient,
   uploadSingleImageClient,
 } from "@/actions/siteActions";
-import { v4 as uuidv4 } from "uuid";
 import { Spinner } from "@nextui-org/react";
-import { PlusCircle } from "lucide-react";
-import { DeleteForever } from "@mui/icons-material";
+import { PlusCircle, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const ProductPhotos = (props) => {
   const [filesNum, setFilesNum] = useState(null);
@@ -33,18 +32,23 @@ const ProductPhotos = (props) => {
 
   function handleImageData(images) {
     return (
-      <div className="mb-6">
-        <div className="product-images">
+      <div className="mb-6 flex flex-col">
+        <div className=" w-32 h-32 rounded-md border-1 border-slate-100 flex justify-center items-center object-cover overflow-hidden mt-3">
           <SingleProductImage
             handleImageDelete={handleImageDelete}
             imageUrl={images.url}
             key={images.publicID}
           />
         </div>
-        <DeleteForever
+
+        <Button
           onClick={() => handleImageDelete(images.publicID)}
-          className="clickable"
-        />
+          variant="destructive"
+          size="icon"
+          className="w-full mt-2 h-auto p-1"
+        >
+          <Trash2 />
+        </Button>
       </div>
     );
   }
@@ -55,12 +59,12 @@ const ProductPhotos = (props) => {
         {isUploading &&
           Array.from({ length: filesNum }).map((_item, index) => (
             <div className="mb-6" key={index}>
-              <div className="product-images">
+              <div className=" w-32 h-32 rounded-md border-2 border-slate-100 flex justify-center items-center mt-3">
                 <Spinner size="lg" color="default" labelColor="foreground" />
               </div>
             </div>
           ))}
-        <div className="product-images">
+        <div className=" w-32 h-32 rounded-md border-2 border-slate-100 flex justify-center items-center mt-3">
           <label htmlFor="product-image">
             <PlusCircle className="add-icon clickable" />
           </label>
