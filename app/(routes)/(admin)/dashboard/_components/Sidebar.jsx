@@ -1,42 +1,18 @@
-import LinkedText from "@/components/Global/LinkedText";
-import SignOut from "@/app/(routes)/(auth)/_component/SignOut";
-import { HiOutlineHome } from "react-icons/hi";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { LuLayoutDashboard } from "react-icons/lu";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { MdPeopleOutline } from "react-icons/md";
-import { BiCategoryAlt } from "react-icons/bi";
-import Link from "next/link";
+"use client";
+
+import Logo from "@/components/Global/Logo";
+import SidebarRoutes from "./SidebarRoutes";
 
 const Sidebar = () => {
   return (
-    <aside className="sidebar">
-      <Link className="sidebar-item" href={"/"}>
-        <HiOutlineHome />
-        <h1>Home</h1>
-      </Link>
-      <Link className="sidebar-item" href={"/dashboard"}>
-        <LuLayoutDashboard />
-        <h1>Dashboard</h1>
-      </Link>
-      <Link className="sidebar-item" href={"/dashboard/products"}>
-        <HiOutlineShoppingBag />
-        <h1>Products</h1>
-      </Link>
-      <Link className="sidebar-item" href={"/dashboard/orders"}>
-        <MdOutlineShoppingCart />
-        <h1>Orders</h1>
-      </Link>
-      <Link className="sidebar-item" href={"/dashboard/category"}>
-        <BiCategoryAlt />
-        <h1>Category</h1>
-      </Link>
-      <Link className="sidebar-item" href={"/dashboard/users"}>
-        <MdPeopleOutline />
-        <h1>Users</h1>
-      </Link>
-      <SignOut />
-    </aside>
+    <div className="h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm">
+      <div className="bg-pink-200 flex justify-center items-center p-3">
+        <Logo />
+      </div>
+      <div className="flex flex-col w-full">
+        <SidebarRoutes />
+      </div>
+    </div>
   );
 };
 

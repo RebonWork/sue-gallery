@@ -2,6 +2,7 @@
 import Image from "next/image";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LinkedText from "../LinkedText";
+import Logo from "../Logo";
 
 const HeaderClient = ({ children }) => {
   return (
@@ -12,7 +13,7 @@ const HeaderClient = ({ children }) => {
         <LinkedText link="/about" text="About" />
       </div>
       <div>
-        <Image src="./logo.svg" height={125} width={125} alt="Brand Logo" />
+        <Logo/>
       </div>
 
       <div className="items">

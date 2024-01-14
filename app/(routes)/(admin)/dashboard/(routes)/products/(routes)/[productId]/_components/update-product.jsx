@@ -14,6 +14,7 @@ import { CategoryField } from "../../_components/CategoryField";
 import { DescriptionField } from "../../_components/DescriptionField";
 import { SubmitFormButton } from "../../_components/SubmitFormButton";
 import formSchema from "../../_components/formSchema";
+import PageLeader from "@/app/(routes)/(admin)/dashboard/_components/PageLeader";
 
 const UpdateProductForm = ({ id, data }) => {
   const [imagesData, setImagesData] = useState([]);
@@ -55,47 +56,50 @@ const UpdateProductForm = ({ id, data }) => {
     setImagesData(data.images);
   }, [data]);
   return (
-    <div className="mt-6">
-      <Form {...form}>
-        <form
-          className="flex flex-row gap-16"
-          onSubmit={handleSubmit(handleAddProduct)}
-        >
-          <div className="flex flex-row gap-12">
-            <div className="w-32">
-              <h3 className="scroll-m-20 text-  l font-semibold tracking-tight">
-                Add Product Photos
-              </h3>
-              <ProductPhotos
-                imagesData={imagesData}
-                setImagesData={(e) => setImagesData(e)}
-              />
+    <>
+      <PageLeader>Update Product Page</PageLeader>
+      <div className="mt-6">
+        <Form {...form}>
+          <form
+            className="flex flex-row gap-16"
+            onSubmit={handleSubmit(handleAddProduct)}
+          >
+            <div className="flex flex-row gap-12">
+              <div className="w-32">
+                <h3 className="scroll-m-20 text-  l font-semibold tracking-tight">
+                  Add Product Photos
+                </h3>
+                <ProductPhotos
+                  imagesData={imagesData}
+                  setImagesData={(e) => setImagesData(e)}
+                />
+              </div>
+              <div className=" w-72">
+                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                  Add Product Cover
+                </h3>
+                <CoverPhoto
+                  coverData={coverData}
+                  setCoverData={(e) => setCoverData(e)}
+                />
+              </div>
             </div>
-            <div className=" w-72">
-              <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                Add Product Cover
-              </h3>
-              <CoverPhoto
-                coverData={coverData}
-                setCoverData={(e) => setCoverData(e)}
-              />
+            <div className=" flex flex-col gap-6">
+              <NameField control={control}></NameField>
+
+              <PriceField control={control}></PriceField>
+
+              <StockField control={control}></StockField>
+
+              <CategoryField control={control}></CategoryField>
+
+              <DescriptionField control={control}></DescriptionField>
+              <SubmitFormButton isSubmitting={isSubmitting} />
             </div>
-          </div>
-          <div className=" flex flex-col gap-6">
-            <NameField control={control}></NameField>
-
-            <PriceField control={control}></PriceField>
-
-            <StockField control={control}></StockField>
-
-            <CategoryField control={control}></CategoryField>
-
-            <DescriptionField control={control}></DescriptionField>
-            <SubmitFormButton isSubmitting={isSubmitting} />
-          </div>
-        </form>
-      </Form>
-    </div>
+          </form>
+        </Form>
+      </div>
+    </>
   );
 };
 
