@@ -59,7 +59,7 @@ export const columns = [
     },
   },
   {
-    accessorKey: "category",
+    accessorKey: "category.name",
     header: ({ column }) => {
       return (
         <Button

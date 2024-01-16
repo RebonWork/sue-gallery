@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/select";
 
 import React, { useEffect, useState } from "react";
-import { v4 } from "uuid";
 
 const DropdownCategory = ({ value, onChange}) => {
   const [categoryData, setCategoryData] = useState([]);
@@ -29,7 +28,7 @@ const DropdownCategory = ({ value, onChange}) => {
   function handleData(categ) {
     return (
       <>
-        <SelectItem key={v4()} value={categ.category.toString()}>
+        <SelectItem value={categ._id}>
           {categ.category}
         </SelectItem>
       </>

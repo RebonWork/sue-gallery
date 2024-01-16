@@ -15,8 +15,15 @@ const productSchema = new Schema(
       required: true,
     },
     category: {
-      type: String,
-      required: true,
+      name:{
+        type:String,
+        required:true
+      },
+      id:{
+        type: Schema.Types.ObjectId,
+        ref:"Category",
+        required:true
+      }
     },
     cover: {
       url:{type:String},

@@ -1,38 +1,63 @@
-import React, { useState } from "react";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
-import CancelIcon from '@mui/icons-material/Cancel';
-import { updatedCategory } from "@/actions/serverActions";
-const CategoryItem = ({ category, id, deleteItem }) => {
-  const [ediable, setEditable] = useState(false);
-  const [currentCategory , setCurrentCategory] = useState(category)
-  const [categoryUpdate, setCategoryUpdate] = useState(category)
-
-  async function handleCategoryUpdate(){
-    await updatedCategory({id, categoryUpdate, currentCategory})
-    setCurrentCategory(categoryUpdate);
-    setEditable(false)
-    console.log("Category Updated");
+import { TableCell } from "@/components/ui/table";
+import EditCategoryForm from "./EditCategoryForm";
+import { useState } from "react";
+import CategoryActions from "./CategoryActions";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteCategory } from "@/actions/serverActions";
+import { useRouter } from "next/navigation";
+import { updateCategory } from "@/actions/queries";
+const CategoryItem = ({ category, id }) => {
+  const [editable, setEditable] = useState(false);
+  const queryClient = useQueryClient();
+  const router = useRouter();
+  const mutateDelete = useMutation(deleteCategory, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("category");
+    },
+  });
+  const mutateUpdate = useMutation(updateCategory, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("category");
+    },
+  });
+  async function handleCategoryDelete() {
+    try {
+      await mutateDelete.mutate(id);
+      router.push("/dashboard/category");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function handleCategoryUpdate(data) {
+    try {
+      await mutateUpdate.mutate({ data, id });
+      router.push("/dashboard/category");
+      await setEditable(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
-    <div className="category">
-      {ediable ? (
-        <div>
-          <input onChange={(e)=>setCategoryUpdate(e.target.value)} value={categoryUpdate} />
-          <CancelIcon className="clickable" onClick={()=>setEditable(false)}/>
-          <button onClick={handleCategoryUpdate}>Save</button>
-        </div>
-      ) : (
-        <h1 key={id}>{currentCategory}</h1>
-      )}
-      <DeleteForeverIcon
-        className="clickable"
-        onClick={() => {
-          deleteItem(id);
-        }}
-      />
-      <EditIcon className="clickable" onClick={() => setEditable(true)} />
-    </div>
+    <>
+      <TableCell className="font-medium text-center">
+        {editable ? (
+          <EditCategoryForm
+            handelCategoryUpdate={handleCategoryUpdate}
+            category={category}
+          />
+        ) : (
+          category
+        )}
+      </TableCell>
+      <TableCell className="text-right">
+        <CategoryActions
+          editable={editable}
+          setEditable={setEditable}
+          handleCategoryDelete={handleCategoryDelete}
+          id={id}
+        />
+      </TableCell>
+    </>
   );
 };
 

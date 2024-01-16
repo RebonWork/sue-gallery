@@ -9,14 +9,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import axios from "axios";
 import { Trash2 } from "lucide-react";
 
 const DeleteButton = ({_id}) => {
   async function deleteProduct(id) {
-    await fetch("/api/product", {
-      method: "DELETE",
-      body: JSON.stringify(id),
-    });
+    await axios.delete(`/api/product/${id}`);
   }
   return (
     <AlertDialog>

@@ -4,6 +4,7 @@ import Product from "@/models/productModel";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import Category from "@/models/categorySchema";
 
 
 export async function GET(res,req) {  
@@ -13,23 +14,18 @@ const dataSend = JSON.stringify(data)
  return new NextResponse(dataSend)
 }
 
-export async function DELETE(req) {
+export async function DELETE(req, res) {
   const session = await getServerSession(authOptions);
   if (!session) {
     return new Response("not premitted");
   }
 
   try {
-    const id = await req.json();
+    const {params:{productId:id}} = res
     const product = await Product?.findById(id);
-    const { cover, images } = product;
-    const deleteCover = deleteSingleImage(cover?.publicID);
-    const deleteImages = images.map((image) =>
-      deleteSingleImage(image.publicID)
-    );
-
+    product?.cover.publicID && deleteSingleImage(product?.cover?.publicID);
+    product?.images && product?.images?.map((image) => deleteSingleImage(image?.publicID));
     await Product?.findOneAndDelete({ _id: id });
-
     return new Response(JSON.stringify("DELETED SUCCESS"));
   } catch (err) {
     console.error(err);
@@ -47,8 +43,9 @@ export async function PATCH(res,req) {
       
   try {
     const data = await res.json()
+    const category = await Category.findById(data.category)
     const {productId} =req.params
-    await Product?.findByIdAndUpdate(productId, data);
+    await Product?.findByIdAndUpdate(productId, {...data, category:{id:category._id, name:category.category}});
 
     return new Response(
       JSON.stringify({ msg: "Product Updated SuccessFully" })

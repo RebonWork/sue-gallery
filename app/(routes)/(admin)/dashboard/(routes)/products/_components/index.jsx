@@ -1,20 +1,13 @@
 "use client";
-import { getData } from "@/actions/siteActions";
-import useSWR from "swr";
-import { DataTableDemo } from "./ProductTable/ProductTable";
+import { ProductTable } from "./ProductTable/ProductTable";
+import { getProduct } from "@/actions/queries";
+import { useQuery } from "react-query";
 
 const DashboardProducts = () => {
+  const { data, isFetched } = useQuery("product", getProduct);
 
 
-  const { data, error } = useSWR("/api/product", getData, {
-    refreshInterval: 2000,
-  });
-
-
-
-  return (
-    <DataTableDemo data={data? data: []}/>
-  );
+  return <ProductTable data={isFetched&&data}/>;
 };
 
 export default DashboardProducts;
