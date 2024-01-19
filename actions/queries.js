@@ -29,7 +29,7 @@ export const deleteUserById = async ({userId}) => {
   const { data } = await axios.delete(`/api/user/${userId}`);
   console.log(data);
 }
-export const addUser = async () => {
+export const addUser = async (data) => {
   await axios.post(`/api/user`);
 };
 

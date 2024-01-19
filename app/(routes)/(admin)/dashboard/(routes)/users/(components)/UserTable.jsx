@@ -24,7 +24,7 @@ const UserTable = ({ data }) => {
         <TableBody>
           {data?.map((user) => (
             <TableRow key={user._id}>
-              <TableCell className="font-medium">{user.name}</TableCell>
+              <TableCell className="font-medium">{user.firstName+" "+user.lastName}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{upperFirst(user.role)}</TableCell>
               <TableCell className="text-center">

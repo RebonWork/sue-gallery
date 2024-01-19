@@ -3,7 +3,11 @@ import { Schema, model, models } from "mongoose";
 const userSchema = new Schema(
   {
     userID: String,
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
       type: String,
       required: true,
     },
@@ -12,22 +16,47 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
     password: String,
     image: String,
     role: {
       type: String,
       default: "user",
     },
-    cartItemsId: [String],
+    cartItemsId: [
+      // {
+      //   ItemId: {
+      //     productID: Schema.Types.ObjectId,
+      //     ref: "Product",
+      //   },
+      //   quantity: Number,
+      // },
+    ],
     address: {
       street1: String,
       street2: String,
       city: String,
       postcode: String,
     },
-    wishlistItemsId: [String],
-    currentOrderID: String,
-    pastOrderID: [String],
+    wishlistItemsId: [
+      // {
+      //   ItemId: {
+      //     productID: Schema.Types.ObjectId,
+      //     ref: "Product",
+      //   },
+      // },
+    ],
+    orderID: [
+      // {
+      //   orderId: {
+      //     orderID: Schema.Types.ObjectId,
+      //     ref: "Order",
+      //   },
+      // },
+    ],
     reviews: [
       {
         productID: String,

@@ -34,10 +34,10 @@ const ManageUserPage = ({ data }) => {
   const form = useForm(
     {
       defaultValues: {
-        name: data?.name,
+        firstName: data?.firstName,
+        lastName: data?.lastName,
         email: data?.email,
         role: data?.role,
-        // status: data?.status
       },
     },
     {
@@ -108,7 +108,7 @@ const ManageUserPage = ({ data }) => {
             <div className="flex flex-row gap-4 w-full">
               <FormField
                 control={form.control}
-                name="name"
+                name="firstName"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
