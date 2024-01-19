@@ -22,7 +22,6 @@ const productSchema = new Schema(
       id:{
         type: Schema.Types.ObjectId,
         ref:"Category",
-        required:true
       }
     },
     cover: {

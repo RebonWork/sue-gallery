@@ -46,7 +46,6 @@ const DropdownCategory = ({ value, onChange}) => {
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="null">None</SelectItem>
             {categoryData.map(handleData)}
           </SelectGroup>
         </SelectContent>

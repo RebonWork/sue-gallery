@@ -25,7 +25,7 @@ const ProfileDropdown = async () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <CircleUserRound className="mr-2 h-4 w-4" />
-          <Link href="/profile">Profile</Link>
+          <Link href="/account/profile">Profile</Link>
         </DropdownMenuItem>
         {session?.user.role === "admin" && (
           <DropdownMenuItem>

@@ -3,9 +3,8 @@ import EditCategoryForm from "./EditCategoryForm";
 import { useState } from "react";
 import CategoryActions from "./CategoryActions";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteCategory } from "@/actions/serverActions";
 import { useRouter } from "next/navigation";
-import { updateCategory } from "@/actions/queries";
+import { deleteCategory, updateCategory } from "@/actions/queries";
 const CategoryItem = ({ category, id }) => {
   const [editable, setEditable] = useState(false);
   const queryClient = useQueryClient();

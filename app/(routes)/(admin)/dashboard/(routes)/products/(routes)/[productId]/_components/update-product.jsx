@@ -94,7 +94,7 @@ const UpdateProductForm = ({ id, data }) => {
               <CategoryField control={control}></CategoryField>
 
               <DescriptionField control={control}></DescriptionField>
-              <SubmitFormButton isSubmitting={isSubmitting} />
+              <SubmitFormButton isSubmitting={isSubmitting}>Update Product</SubmitFormButton>
             </div>
           </form>
         </Form>

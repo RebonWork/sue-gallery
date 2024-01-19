@@ -98,7 +98,7 @@ const AddProductForm = () => {
               isSubmitSuccessful={isSubmitSuccessful}
               control={control}
             ></DescriptionField>
-            <SubmitFormButton isSubmitting={isSubmitting} />
+            <SubmitFormButton isSubmitting={isSubmitting} >Add New Product</SubmitFormButton>
           </div>
         </form>
       </Form>

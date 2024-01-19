@@ -4,7 +4,12 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(req, res) {
   const { params } = res;
-  const deleteCategory = await Category.findByIdAndDelete(params.categoryId);
+  try {
+    console.log(res);
+    const deleteCategory = await Category.findByIdAndDelete(params.categoryId);
+  }catch (error) {
+    console.log(error)
+  }
   return new NextResponse("done");
 }
 export async function PATCH(req, res) {

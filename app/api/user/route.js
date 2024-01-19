@@ -19,21 +19,9 @@ export async function GET() {
     return new Response("not premitted");
   }
   try {
-    const user = await User.find()
-  } catch (error) {console.log(error);}
-  return new Response(JSON.stringify(user));
-}
-
-export async function DELETE(req) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return new Response("not premitted");
-  }
-}
-
-export async function PATCH(req) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return new Response("not premitted");
+    const data = await User.find();
+    return new Response(JSON.stringify(data));
+  } catch (error) {
+    console.log(error);
   }
 }

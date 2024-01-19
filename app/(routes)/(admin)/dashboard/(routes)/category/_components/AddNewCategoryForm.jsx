@@ -68,7 +68,7 @@ export function AddNewCategoryForm() {
               </FormItem>
             )}
           />
-          <SubmitFormButton isSubmitting={form.formState.isSubmitting} />
+          <SubmitFormButton isSubmitting={form.formState.isSubmitting}>Add New Category</SubmitFormButton>
         </form>
       </Form>
     </div>

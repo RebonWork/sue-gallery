@@ -7,10 +7,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const RoleDropdown = ({ setNewRole, role }) => {
+const RoleDropdown = ({ onChange, value }) => {
 
   return (
-    <Select defaultValue={role} onValueChange={setNewRole}>
+    <Select defaultValue={value} onValueChange={onChange}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a Role" />
       </SelectTrigger>
