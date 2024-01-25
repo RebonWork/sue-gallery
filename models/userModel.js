@@ -27,13 +27,10 @@ const userSchema = new Schema(
       default: "user",
     },
     cartItemsId: [
-      // {
-      //   ItemId: {
-      //     productID: Schema.Types.ObjectId,
-      //     ref: "Product",
-      //   },
-      //   quantity: Number,
-      // },
+      {
+        productId: { type: Schema.Types.ObjectId, ref: "Product" },
+        quantity: Number,
+      },
     ],
     address: {
       street1: String,
@@ -42,21 +39,9 @@ const userSchema = new Schema(
       postcode: String,
     },
     wishlistItemsId: [
-      // {
-      //   ItemId: {
-      //     productID: Schema.Types.ObjectId,
-      //     ref: "Product",
-      //   },
-      // },
+      { productId: { type: Schema.Types.ObjectId, ref: "Product" } },
     ],
-    orderID: [
-      // {
-      //   orderId: {
-      //     orderID: Schema.Types.ObjectId,
-      //     ref: "Order",
-      //   },
-      // },
-    ],
+    orderID: [{ orderId: { type: Schema.Types.ObjectId, ref: "Order" } }],
     reviews: [
       {
         productID: String,

@@ -8,7 +8,9 @@ export default function Page() {
   return (
     <div className="px-10 mt-6">
       <h1 className="text-5xl font-black">Users</h1>
-      <div  className="px-24 mt-8">{!isFetched ? "loading" : <UserTable data={data} />}</div>
+      <div className="px-24 mt-8">
+        <UserTable data={data} isFetched={isFetched} />
+      </div>
     </div>
   );
 }

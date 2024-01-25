@@ -7,8 +7,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import CategoryItem from "./CategoryItem";
+import CategoryTableSkeleton from "./CategoryTableSkeleton";
 
-const CategoryTable = ({ data }) => {
+const CategoryTable = ({ data , isFetched }) => {
 
   return (
     <Table className="w-full">
@@ -20,11 +21,11 @@ const CategoryTable = ({ data }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data?.map((category) => (
+        {isFetched? data?.map((category) => (
           <TableRow key={category._id}>
             <CategoryItem category={category.category} id={category._id}/>
           </TableRow>
-        ))}
+        )): <CategoryTableSkeleton/>}
       </TableBody>
     </Table>
   );

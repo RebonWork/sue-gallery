@@ -52,13 +52,11 @@ const UpdateProductForm = ({ id, data }) => {
     }
   }
   useEffect(() => {
-    setCoverData(data.cover);
-    setImagesData(data.images);
+    setCoverData(data?.cover);
+    setImagesData(data?.images);
   }, [data]);
   return (
     <>
-      <PageLeader>Update Product Page</PageLeader>
-      <div className="mt-6">
         <Form {...form}>
           <form
             className="flex flex-row gap-16"
@@ -98,7 +96,6 @@ const UpdateProductForm = ({ id, data }) => {
             </div>
           </form>
         </Form>
-      </div>
     </>
   );
 };

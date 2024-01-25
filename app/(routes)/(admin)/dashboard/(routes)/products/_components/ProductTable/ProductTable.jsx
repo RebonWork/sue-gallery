@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export function ProductTable({data}) {
+export function ProductTable({data, isFetched}) {
   const [sorting, setSorting] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
   const [rowSelection, setRowSelection] = React.useState({});
@@ -99,7 +99,7 @@ export function ProductTable({data}) {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                   {isFetched? "Product Not Found" : "Loading..."}
                 </TableCell>
               </TableRow>
             )}

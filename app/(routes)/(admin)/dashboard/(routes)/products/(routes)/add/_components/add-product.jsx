@@ -59,7 +59,7 @@ const AddProductForm = () => {
     }
   }, [isSubmitSuccessful, reset]);
   return (
-    <div className="mt-6">
+
       <Form {...form}>
         <form
           className="flex flex-row gap-16"
@@ -102,7 +102,7 @@ const AddProductForm = () => {
           </div>
         </form>
       </Form>
-    </div>
+
   );
 };
 

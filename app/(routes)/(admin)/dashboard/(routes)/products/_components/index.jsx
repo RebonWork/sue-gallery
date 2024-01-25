@@ -7,7 +7,7 @@ const DashboardProducts = () => {
   const { data, isFetched } = useQuery("product", getProduct);
 
 
-  return <ProductTable data={isFetched&&data}/>;
+  return <ProductTable isFetched={isFetched} data={isFetched&&data}/>;
 };
 
 export default DashboardProducts;

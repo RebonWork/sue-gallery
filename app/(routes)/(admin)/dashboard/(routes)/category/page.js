@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import { AddNewCategoryForm } from "./_components/AddNewCategoryForm";
 
 export default function Page() {
-  const { data } = useQuery("category", getCategory);
+  const { data , isFetched } = useQuery("category", getCategory);
 
   return (
     <div>
@@ -15,7 +15,7 @@ export default function Page() {
       </div>
       <div>
         <div className="px-12 mt-6">
-          <CategoryTable data={data} />
+          <CategoryTable data={data} isFetched={isFetched} />
         </div>
       </div>
     </div>
