@@ -11,11 +11,11 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import RoleDropdown from "./RoleDropdown";
-import { SubmitFormButton } from "../../products/(routes)/_components/SubmitFormButton";
+import { SubmitFormButton } from "../../../products/(routes)/_components/SubmitFormButton";
 import { usePathname, useRouter } from "next/navigation";
 import { deleteUserById, updateUserById } from "@/actions/queries";
 import { useMutation, useQueryClient } from "react-query";
-import DeleteById from "./DeleteById";
+import DeleteById from "../../_components/DeleteById";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { SelectSeparator } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
@@ -30,7 +30,7 @@ const ManageUserPage = ({ data }) => {
     role: z.string().min(1, { message: "Required" }),
     // status: z.string().min(1, { message: "Required" }),
   });
-  const {toast} = useToast();
+  const { toast } = useToast();
   const form = useForm(
     {
       defaultValues: {
@@ -67,12 +67,12 @@ const ManageUserPage = ({ data }) => {
       toast({
         description: "User updated successfully",
         variant: "success",
-      })
+      });
     } catch (error) {
       toast({
         description: "Something went wrong, please try again",
         variant: "destructive",
-      })
+      });
     }
   }
   async function handleDelete() {

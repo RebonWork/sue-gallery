@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import CategoryItem from "./CategoryItem";
-import CategoryTableSkeleton from "./CategoryTableSkeleton";
+import CategoryTableSkeleton from "../Category Skelaton/CategoryTableSkeleton";
 
 const CategoryTable = ({ data , isFetched }) => {
 
@@ -16,7 +16,7 @@ const CategoryTable = ({ data , isFetched }) => {
       <TableCaption>A list of your product categories.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-44 text-center">Category</TableHead>
+          <TableHead className="w-44 text-left">Category</TableHead>
           <TableHead className="text-right"><div className="mr-5">Actions</div></TableHead>
         </TableRow>
       </TableHeader>

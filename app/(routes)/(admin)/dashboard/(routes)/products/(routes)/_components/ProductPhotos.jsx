@@ -59,12 +59,12 @@ const ProductPhotos = (props) => {
         {isUploading &&
           Array.from({ length: filesNum }).map((_item, index) => (
             <div className="mb-6" key={index}>
-              <div className=" w-32 h-32 rounded-md border-2 border-slate-100 flex justify-center items-center mt-3">
+              <div className=" w-32 h-32 border-1 shadow-sm border-slate-100 flex justify-center items-center mt-3">
                 <Spinner size="lg" color="default" labelColor="foreground" />
               </div>
             </div>
           ))}
-        <div className=" w-32 h-32 rounded-md border-2 border-slate-100 flex justify-center items-center mt-3">
+        <div className=" w-32 h-32 border-1 shadow-sm border-slate-100 flex justify-center items-center mt-3">
           <label htmlFor="product-image">
             <PlusCircle className="add-icon clickable" />
           </label>

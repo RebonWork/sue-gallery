@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import AdminDropdownMenu from "../../../_components/AdminDropdownMenu";
+import AdminDropdownMenu from "./AdminDropdownMenu";
 const NavbarRoutes = () => {
   return (
     <div className="flex gap-x-2 ml-auto">

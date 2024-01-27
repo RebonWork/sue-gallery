@@ -1,4 +1,4 @@
-import SidebarItem from "@/app/(routes)/(admin)/dashboard/_components/SidebarItem";
+import SidebarItem from "@/app/(routes)/(admin)/dashboard/_components/Admin Sidebar/SidebarItem";
 import { User2 } from "lucide-react";
 
 const ProfileSidebarRoutes = () => {

@@ -48,7 +48,7 @@ export function AddNewCategoryForm() {
     reset();
   }, [isSubmitSuccessful,reset]);
   return (
-    <div className="mt-6">
+    <div>
       <h1 className="text-3xl font-black block">Add New Category</h1>
       <Form {...form}>
         <form

@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import {columns} from "./columns"
+import {columns} from "./TableColumns"
 import {
   flexRender,
   getCoreRowModel,

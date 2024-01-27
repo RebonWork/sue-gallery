@@ -38,7 +38,7 @@ const CategoryItem = ({ category, id }) => {
   }
   return (
     <>
-      <TableCell className="font-medium text-center">
+      <TableCell className="font-medium">
         {editable ? (
           <EditCategoryForm
             handelCategoryUpdate={handleCategoryUpdate}
@@ -48,7 +48,7 @@ const CategoryItem = ({ category, id }) => {
           category
         )}
       </TableCell>
-      <TableCell className="text-right">
+      <TableCell>
         <CategoryActions
           editable={editable}
           setEditable={setEditable}
