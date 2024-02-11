@@ -10,9 +10,9 @@ const sendEmail = async ({ to, url, text }) => {
     },
   });
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: `"Sue Gallery" <${process.env.EMAIL_USER}>`,
     to,
-    subject: "Nextjs",
+    subject: "Is it you? Click to confirm & join the fun",
     html: html({ url, text }),
   };
 

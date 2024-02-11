@@ -3,6 +3,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Category from "@/models/categorySchema";
 import Product from "@/models/productModel";
 import User from "@/models/userModel";
+import sendEmail from "@/utils/sendEmail";
+import { generateToken } from "@/utils/token";
 import { getServerSession } from "next-auth";
 
 export async function getCategory() {
