@@ -1,18 +1,38 @@
 import RecentOrders from "./_components/RecentOrders";
-import RevenueChart from "./_components/RevenueChart";
-import SideAnalytics from "./_components/Side Analytics/SideAnalytics";
-import TopAnalytics from "./_components/Top Analytics/TopAnalytics";
-
+import SideAnalytics from "./_components/SideAnalytics";
+import TopAnalytics from "./_components/TopAnalytics";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { WeekOverview } from "./_components/WeekOverview";
 
 const Page = () => {
   return (
     <div className="flex flex-row gap-6 m-6">
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 w-full">
         <TopAnalytics />
-        <RevenueChart />
-        <RecentOrders />
+        <Card>
+          <CardHeader className="text-sm font-medium">
+            The Weeks Revenue
+          </CardHeader>
+          <CardContent>
+            <WeekOverview />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Recent Orders</CardTitle>
+          </CardHeader>
+          <CardContent>
+          <div className="h-12 w-full">Orders 1</div>
+          <div className="h-12 w-full">Orders 2</div>
+          <div className="h-12 w-full">Orders 3</div>
+          <div className="h-12 w-full">Orders 4</div>
+          <div className="h-12 w-full">Orders 5</div>
+          </CardContent>
+        </Card>
       </div>
-      <SideAnalytics />
+      <div className="w-[500px]">
+        <SideAnalytics />
+      </div>
     </div>
   );
 };
