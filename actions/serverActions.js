@@ -3,7 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Category from "@/models/categorySchema";
 import Product from "@/models/productModel";
 import User from "@/models/userModel";
-import sendEmail from "@/utils/sendEmail";
+import { sendVerificationEmail } from "@/utils/sendEmail";
 import { generateToken } from "@/utils/token";
 import { getServerSession } from "next-auth";
 
@@ -67,9 +67,9 @@ export async function getSessionServer(){
 export async function verifyEmail({email, user}) {
   
   const token = generateToken({user})
-  await sendEmail({
+  await sendVerificationEmail({
     to: email,
     url: `${process.env.WEBSITE_URL}/verify?token=${token}`,
-    text: "VERIFY EMAIL",
+    user: user
   });
 }

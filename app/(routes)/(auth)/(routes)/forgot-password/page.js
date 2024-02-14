@@ -1,4 +1,5 @@
 "use client";
+import { ForgotPasswordWithCredentials } from "@/actions/authActions";
 import FormButton from "@/components/Global/Button";;
 import Form from "@/components/Global/Form";
 import React from "react";

@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { RedirectType, redirect } from "next/navigation";
 import bcrypt, { hash } from "bcrypt";
 import { generateToken, verifyToken } from "@/utils/token";
-import sendEmail from "@/utils/sendEmail";
+import { sendResetPasswordEmail, sendVerificationEmail } from "@/utils/sendEmail";
 
 const BASE_URL = process.env.NEXTAUTH_URL;
 
@@ -38,11 +38,11 @@ export async function signUpCredentials(data) {
 
     const token = generateToken({ user: data });
 
-    await sendEmail({
-      to: data.email,
-      url: `${BASE_URL}/verify?token=${token}`,
-      text: "VERIFY EMAIL",
-    });
+    // await sendVerificationEmail({
+    //   to: data.email,
+    //   url: `${BASE_URL}/verify?token=${token}`,
+    //   user:
+    // });
     return {
       msg: "Sign Up Success! Check Your Email to complete the registeration",
     };
@@ -105,10 +105,10 @@ export async function ForgotPasswordWithCredentials({ email }) {
       );
     }
     const token =  generateToken({userId : user._id})
-    await sendEmail({
+    await sendResetPasswordEmail({
       to:email,
       url: `${BASE_URL}/reset-password?token=${token}`,
-      text:"RESET PASSWORD"
+      user: user.firstName
     })
 
     

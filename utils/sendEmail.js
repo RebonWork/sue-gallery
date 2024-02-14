@@ -1,7 +1,8 @@
 import nodemailer from "nodemailer";
-import { html } from "./htmlEmail";
+import { resetPasswordEmail, verifyEmailhtml } from "./htmlEmail";
 
-const sendEmail = async ({ to, url, text }) => {
+export const sendVerificationEmail = async ({ to, url, user }) => {
+  console.log({ to, url, user });
   const trasporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -13,11 +14,28 @@ const sendEmail = async ({ to, url, text }) => {
     from: `"Sue Gallery" <${process.env.EMAIL_USER}>`,
     to,
     subject: "Is it you? Click to confirm & join the fun",
-    html: html({ url, text }),
+    html: verifyEmailhtml({ url, user }),
   };
 
   const result = await trasporter.sendMail(mailOptions)
   return result
 };
+export const sendResetPasswordEmail = async ({ to, url, user }) => {
+  console.log({ to, url, user });
+  const trasporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+  const mailOptions = {
+    from: `"Sue Gallery" <${process.env.EMAIL_USER}>`,
+    to,
+    subject: "Is it you? Click to confirm & join the fun",
+    html: resetPasswordEmail({ url, user }),
+  };
 
-export default sendEmail;
+  const result = await trasporter.sendMail(mailOptions)
+  return result
+};

@@ -1,10 +1,12 @@
-import HeaderClient from './HeaderClient'
-import ProfileButton from './ProfileButton'
+import HeaderClient from "./HeaderClient";
+import ProfileButton from "./ProfileButton";
 
 const Header = () => {
   return (
-    <HeaderClient><ProfileButton/></HeaderClient>
-  )
-}
+    <HeaderClient>
+      <ProfileButton />
+    </HeaderClient>
+  );
+};
 
-export default Header
+export default Header;

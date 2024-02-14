@@ -6,7 +6,8 @@ import connectDB from "@/utils/database";
 import User from "@/models/userModel";
 import bcrypt from "bcrypt";
 import { generateToken } from "@/utils/token";
-import sendEmail from "@/utils/sendEmail";
+import { sendVerificationEmail } from "@/utils/sendEmail";
+
 
 connectDB();
 export async function POST(req) {
@@ -21,10 +22,11 @@ export async function POST(req) {
       data.password = await bcrypt.hash(data.password, 12);
     }
     const token = generateToken({ user: data });
-    await sendEmail({
+    
+    await sendVerificationEmail({
       to: data.email,
       url: `${process.env.WEBSITE_URL}/verify?token=${token}`,
-      text: "VERIFY EMAIL",
+      user: data.firstName
   });
       const newUser = new User(data);
       await newUser.save();

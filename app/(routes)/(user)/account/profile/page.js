@@ -6,11 +6,10 @@ import { useSession } from "next-auth/react";
 
 export default function Page() {
   const { data } = useSession();
-  console.log(data);
   
   async function handleVerifyEmail() {
     try {
-      verifyEmail({ email: data?.user?.email, user:data?.user });
+      verifyEmail({ email: data?.user?.email, user: data?.user?.firstName });
     } catch (error) {
       console.log(error);
     }
