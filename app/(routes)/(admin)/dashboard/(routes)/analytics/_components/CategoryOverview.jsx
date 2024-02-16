@@ -104,8 +104,8 @@ export default function CategoryOverview() {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} opacity={activeIndex===-1? 1: 0.5} />
           ))}
         </Pie>
-          {activeIndex===-1 && <text x={200} y={152} dy={-5} style={{fontSize:"14px", fontWeight:"bolder"}} textAnchor="middle">Total Sales</text>}
-          {activeIndex===-1 && <text x={200} y={152} dy="1.1em" style={{fontSize:"24px"}} textAnchor="middle">${ data.reduce((a, b) => a + b.value, 0)}</text>}
+          {activeIndex===-1 && <text x={200} y={160} dy={-5} style={{fontSize:"14px", fontWeight:"bolder"}} textAnchor="middle">Total Sales</text>}
+          {activeIndex===-1 && <text x={200} y={160} dy="1.1em" style={{fontSize:"24px"}} textAnchor="middle">${ data.reduce((a, b) => a + b.value, 0)}</text>}
         <Legend content={customLegend} />
       </PieChart>
     </ResponsiveContainer>

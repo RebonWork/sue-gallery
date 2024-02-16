@@ -22,15 +22,11 @@ const Page = () => {
             <CardTitle className="text-sm font-medium">Recent Orders</CardTitle>
           </CardHeader>
           <CardContent>
-          <div className="h-12 w-full">Orders 1</div>
-          <div className="h-12 w-full">Orders 2</div>
-          <div className="h-12 w-full">Orders 3</div>
-          <div className="h-12 w-full">Orders 4</div>
-          <div className="h-12 w-full">Orders 5</div>
+            <RecentOrders />
           </CardContent>
         </Card>
       </div>
-      <div className="w-[500px]">
+      <div>
         <SideAnalytics />
       </div>
     </div>

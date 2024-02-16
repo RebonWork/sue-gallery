@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import CategoryOverview from "./CategoryOverview";
+import TopProducts from "./TopProduct";
 
 const SideAnalytics = () => {
   return (
@@ -17,11 +18,7 @@ const SideAnalytics = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-12 w-full">Product 1</div>
-          <div className="h-12 w-full">Product 2</div>
-          <div className="h-12 w-full">Product 3</div>
-          <div className="h-12 w-full">Product 4</div>
-          <div className="h-12 w-full">Product 5</div>
+          <TopProducts />
         </CardContent>
       </Card>
       <Card>
@@ -30,7 +27,7 @@ const SideAnalytics = () => {
             Sales By Category
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="w-full flex justify-center">
           <CategoryOverview />
         </CardContent>
       </Card>
