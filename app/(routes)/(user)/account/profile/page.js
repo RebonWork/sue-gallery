@@ -1,7 +1,6 @@
 "use client";
 import { verifyEmail } from "@/actions/serverActions";
 import { Button } from "@/components/ui/button";
-import { generateToken } from "@/utils/token";
 import { useSession } from "next-auth/react";
 
 export default function Page() {

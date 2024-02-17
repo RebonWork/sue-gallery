@@ -2,7 +2,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import User from "@/models/userModel";
 import { getServerSession } from "next-auth";
-import { RedirectType, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import bcrypt, { hash } from "bcrypt";
 import { generateToken, verifyToken } from "@/utils/token";
 import { sendResetPasswordEmail, sendVerificationEmail } from "@/utils/sendEmail";
@@ -38,11 +38,11 @@ export async function signUpCredentials(data) {
 
     const token = generateToken({ user: data });
 
-    // await sendVerificationEmail({
-    //   to: data.email,
-    //   url: `${BASE_URL}/verify?token=${token}`,
-    //   user:
-    // });
+    await sendVerificationEmail({
+      to: data.email,
+      url: `${BASE_URL}/verify?token=${token}`,
+      user: data
+    });
     return {
       msg: "Sign Up Success! Check Your Email to complete the registeration",
     };

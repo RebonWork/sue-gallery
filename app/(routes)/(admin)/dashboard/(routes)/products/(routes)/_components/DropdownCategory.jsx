@@ -1,4 +1,4 @@
-import { getCategory } from "@/actions/serverActions";
+import { getCategory } from "@/actions/queries";
 import {
   Select,
   SelectContent,
@@ -7,28 +7,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useQuery } from "react-query";
 
-import React, { useEffect, useState } from "react";
-
-const DropdownCategory = ({ value, onChange}) => {
-  const [categoryData, setCategoryData] = useState([]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    async function getCategoryData() {
-      const data = await getCategory();
-      const res = JSON.parse(data);
-      setCategoryData(res);
-    }
-    getCategoryData();
-    return () => {
-      controller.abort();
-    };
-  }, []);
+const DropdownCategory = ({ defaultValue, onChange }) => {
+  const { data, isFetched } = useQuery("category", getCategory);
   function handleData(categ) {
     return (
       <>
-        <SelectItem value={categ._id}>
+        <SelectItem key={categ._id} value={categ._id}>
           {categ.category}
         </SelectItem>
       </>
@@ -37,17 +23,12 @@ const DropdownCategory = ({ value, onChange}) => {
 
   return (
     <>
-      <Select
-        value={value}
-        onValueChange={onChange}
-      >
+      <Select defaultValue={defaultValue} onValueChange={onChange}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select Category" />
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup>
-            {categoryData.map(handleData)}
-          </SelectGroup>
+          {isFetched && data?.map(handleData)}
         </SelectContent>
       </Select>
     </>

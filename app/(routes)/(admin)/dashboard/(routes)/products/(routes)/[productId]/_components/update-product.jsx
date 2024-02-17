@@ -14,7 +14,6 @@ import { CategoryField } from "../../_components/CategoryField";
 import { DescriptionField } from "../../_components/DescriptionField";
 import { SubmitFormButton } from "../../_components/SubmitFormButton";
 import formSchema from "../../_components/formSchema";
-import PageLeader from "@/app/(routes)/(admin)/dashboard/_components/PageLeader";
 
 const UpdateProductForm = ({ id, data }) => {
   const [imagesData, setImagesData] = useState([]);
@@ -27,7 +26,7 @@ const UpdateProductForm = ({ id, data }) => {
       description: data?.description,
       price: data?.price,
       stock: data?.stock,
-      category: data?.category,
+      category: data?.category.id,
     },
     resolver: zodResolver(formSchema),
   });
@@ -89,7 +88,7 @@ const UpdateProductForm = ({ id, data }) => {
 
               <StockField control={control}></StockField>
 
-              <CategoryField control={control}></CategoryField>
+              <CategoryField control={control} ></CategoryField>
 
               <DescriptionField control={control}></DescriptionField>
               <SubmitFormButton isSubmitting={isSubmitting}>Update Product</SubmitFormButton>

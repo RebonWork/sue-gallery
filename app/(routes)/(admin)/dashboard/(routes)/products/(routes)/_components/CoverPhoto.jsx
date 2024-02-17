@@ -2,8 +2,7 @@ import {
   deleteSingleImageClient,
   uploadSingleImageClient,
 } from "@/actions/siteActions";
-import { Delete, PlusCircle, Trash2 } from "lucide-react";
-import { DeleteForever } from "@mui/icons-material";
+import { PlusCircle, Trash2 } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { Spinner } from "@nextui-org/react";

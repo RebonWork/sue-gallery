@@ -18,7 +18,7 @@ export function CategoryField(props) {
         <FormItem>
           <FormLabel>Product Category</FormLabel>
           <FormControl>
-            <DropdownCategory value={value} onChange={onChange} />
+            <DropdownCategory defaultValue={value} onChange={onChange} />
           </FormControl>
           <FormDescription>Please Enter The Product Category.</FormDescription>
           <FormMessage />

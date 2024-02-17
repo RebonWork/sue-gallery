@@ -1,16 +1,12 @@
 "use client";
-import { getData } from "@/actions/siteActions";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import ProductSkeleton from "@/components/Global/ProductSkelaton";
 import { v4 } from "uuid";
+import { getProduct } from "@/actions/queries";
 
-export default function ProductList({children}) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => async () => setData(await getData()), []);
-  useEffect(() => setLoading(false), [data]);
+export default function ProductList({ children }) {
+  const { data, isFetched } = useQuery("product", getProduct);
 
   function mapProducts(prod) {
     return (
@@ -30,8 +26,8 @@ export default function ProductList({children}) {
 
   return (
     <div>
-    {children}
-      {loading ? <ProductSkeleton /> : data?.map(mapProducts)}
+      {children}
+      {isFetched ? data?.map(mapProducts) : <ProductSkeleton />}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 "use server";
-import { verifyEmail } from "@/actions/serverActions";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 
