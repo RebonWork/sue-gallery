@@ -7,7 +7,7 @@ const SignOut = () => {
   return (
     <button className="sidebar-item" onClick={signOut}>
       <MdLogout />
-      <h1>SignOut</h1>
+      <span>SignOut</span>
     </button>
   );
 };

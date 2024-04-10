@@ -1,5 +1,7 @@
-import Header from "@/components/Global/HeaderComponent/HeaderClient";
-
 export default function Page() {
-  return( <div><Header/></div>);
+  return( 
+    <div>
+      <h1>This is the About Page</h1>
+    </div>
+  );
 }
