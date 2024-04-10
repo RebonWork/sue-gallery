@@ -43,7 +43,6 @@ export async function PATCH(res,req) {
       
   try {
     const data = await res.json()
-    console.log(data);
     const category = await Category.findById(data.category)
     const {productId} =req.params
     await Product?.findByIdAndUpdate(productId, {...data, category:{id:category._id, name:category.category}});

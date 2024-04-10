@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2Icon, XCircle } from "lucide-react";
 

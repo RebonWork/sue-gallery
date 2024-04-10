@@ -107,7 +107,7 @@ export const columns = [
   },
   {
     accessorKey: "_id",
-    header: ()=> <h1 className="flex justify-center">Actions</h1>,
+    header: ()=> <span className="flex justify-center">Actions</span>,
     // enableHiding: false,
     cell: (row) => {
       return (

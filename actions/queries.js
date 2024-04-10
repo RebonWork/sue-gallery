@@ -45,3 +45,15 @@ export const deleteCategory = async (id) => {
 export const updateCategory = async ({ data, id }) => {
   await axios.patch(`/api/category/${id}`, data);
 };
+
+export const updateProduct = async (data) => {
+  await axios.patch(`/api/product/${data.id}`, {...data})
+}
+
+export const addProduct = async (data) => {
+  await axios.post(`/api/product`, {...data});
+}
+
+export const deleteProduct = async (id) => {
+  await axios.delete(`/api/product/${id}`);
+}

@@ -51,21 +51,21 @@ export async function signUpCredentials(data) {
   }
 }
 
-export async function verifyWithCredentials(token) {
-  try {
-    const { user } = verifyToken(token);
-    const userExist = await User.findOne({ email: user.email });
-    if (userExist) return { msg: "Verify Success" };
+// export async function verifyWithCredentials(token) {
+//   try {
+//     const { user } = verifyToken(token);
+//     const userExist = await User.findOne({ email: user.email });
+//     if (userExist) return { msg: "Verify Success" };
 
-    const newUser = new User(user);
-    await newUser.save();
-    return {
-      msg: "Verify Success!",
-    };
-  } catch (error) {
-    redirect(`/errors?error=${error.message}`);
-  }
-}
+//     const newUser = new User(user);
+//     await newUser.save();
+//     return {
+//       msg: "Verify Success!",
+//     };
+//   } catch (error) {
+//     redirect(`/errors?error=${error.message}`);
+//   }
+// }
 
 export async function ChangePasswordWithCredentials({ old_pass, new_pass }) {
   const session = await getServerSession(authOptions);

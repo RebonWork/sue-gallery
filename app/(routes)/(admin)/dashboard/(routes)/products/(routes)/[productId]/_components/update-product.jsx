@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-
+import { useMutation, useQueryClient } from "react-query";
 import ProductPhotos from "../../_components/ProductPhotos";
 import CoverPhoto from "../../_components/CoverPhoto";
 import { NameField } from "../../_components/NameField";
@@ -14,8 +13,16 @@ import { CategoryField } from "../../_components/CategoryField";
 import { DescriptionField } from "../../_components/DescriptionField";
 import { SubmitFormButton } from "../../_components/SubmitFormButton";
 import formSchema from "../../_components/formSchema";
+import { IsActiveSwitch } from "../../_components/IsActiveSwitch";
+import { updateProduct } from "@/actions/queries";
 
 const UpdateProductForm = ({ id, data }) => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(updateProduct, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("product");
+    },
+  });
   const [imagesData, setImagesData] = useState([]);
   const [coverData, setCoverData] = useState(null);
   const { toast } = useToast();
@@ -27,6 +34,7 @@ const UpdateProductForm = ({ id, data }) => {
       price: data?.price,
       stock: data?.stock,
       category: data?.category.id,
+      isActive: data?.isActive,
     },
     resolver: zodResolver(formSchema),
   });
@@ -34,11 +42,7 @@ const UpdateProductForm = ({ id, data }) => {
   const { isSubmitting } = formState;
   async function handleAddProduct(data) {
     try {
-      await axios.patch(`/api/product/${id}`, {
-        ...data,
-        cover: coverData,
-        images: imagesData,
-      });
+      await mutation.mutate({id, ...data, cover: coverData, images: imagesData});
       toast({
         description: "Product Successfully Added",
         variant: "success",
@@ -89,6 +93,8 @@ const UpdateProductForm = ({ id, data }) => {
               <StockField control={control}></StockField>
 
               <CategoryField control={control} ></CategoryField>
+              
+              <IsActiveSwitch control={control}></IsActiveSwitch>
 
               <DescriptionField control={control}></DescriptionField>
               <SubmitFormButton isSubmitting={isSubmitting}>Update Product</SubmitFormButton>

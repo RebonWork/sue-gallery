@@ -8,7 +8,9 @@ const Provider = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <NextUIProvider>
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>
+        {children}
+        </SessionProvider>
       </NextUIProvider>
     </QueryClientProvider>
   );

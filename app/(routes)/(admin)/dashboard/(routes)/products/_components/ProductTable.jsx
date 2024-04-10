@@ -21,6 +21,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {Plus } from "lucide-react";
+import Link from "next/link";
 
 export function ProductTable({data, isFetched}) {
   const [sorting, setSorting] = React.useState([]);
@@ -46,7 +48,7 @@ export function ProductTable({data, isFetched}) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex justify-between items-center py-4">
         <Input
           placeholder="Search For Product..."
           value={table.getColumn("name")?.getFilterValue() ?? ""}
@@ -55,6 +57,13 @@ export function ProductTable({data, isFetched}) {
           }
           className="max-w-sm"
         />
+                <Button
+          size="lg"
+          className=" text-lg flex items-center gy-2 gap-x-1 bg-pink-300 hover:bg-pink-400"
+        >
+          <Plus />
+          <Link href={"/dashboard/products/add"}> <span>Add Products</span> </Link>
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>

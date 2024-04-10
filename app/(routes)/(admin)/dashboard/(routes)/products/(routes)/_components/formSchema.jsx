@@ -5,6 +5,7 @@ const formSchema = z.object({
     price: z.coerce.number().min(1, { message: "Required" }),
     stock: z.coerce.number().min(1, { message: "Required" }),
     category: z.string().min(1, { message: "Required" }),
+    isActive: z.boolean().default(false).optional(),
   });
  
 export default formSchema;

@@ -15,7 +15,7 @@ function SingleOrder({
   title,
   category,
   totalSale,
-  sale,
+  numberInstock,
   status,}) {
   return (
     <TableRow>
@@ -37,7 +37,7 @@ function SingleOrder({
         </div>
       </TableCell>
       <TableCell className="text-center">{totalSale}</TableCell>
-      <TableCell className="text-center">{sale}</TableCell>
+      <TableCell className="text-center">{numberInstock}</TableCell>
       <TableCell className="text-center">
         <Badge className={cn(status === "In Stock" ? "bg-green-100 text-green-700 hover:bg-green-500/20" : "bg-red-100 text-red-700 hover:bg-red-500/30")} variant="default">{status}</Badge>
       </TableCell>
@@ -52,7 +52,7 @@ const orders=[
     category:"Tut Bag",
     orderId:"018db346-2258abdeda6e",
     totalSale:"$300",
-    sale:"2",
+    numberInstock:"12",
     status:"In Stock"
 },
     {
@@ -61,7 +61,7 @@ const orders=[
     category:"Tut Bag",
     orderId:"018db346-2258abdeda6e",
     totalSale:"$300",
-    sale:"2",
+    numberInstock:"6",
     status:"In Stock"
 },
     {
@@ -70,7 +70,7 @@ const orders=[
     category:"Tut Bag",
     orderId:"018db346-2258abdeda6e",
     totalSale:"$300",
-    sale:"2",
+    numberInstock:"0",
     status:"Out of Stock"
 },
     {
@@ -79,7 +79,7 @@ const orders=[
     category:"Tut Bag",
     orderId:"018db346-2258abdeda6e",
     totalSale:"$300",
-    sale:"2",
+    numberInstock:"43",
     status:"In Stock"
 },
     {
@@ -88,7 +88,7 @@ const orders=[
     category:"Tut Bag",
     orderId:"018db346-2258abdeda6e",
     totalSale:"$300",
-    sale:"2",
+    numberInstock:"12",
     status:"In Stock"
 },
 ]
@@ -100,8 +100,8 @@ const TopProducts = () => {
         <TableRow>
           <TableHead></TableHead>
           <TableHead className="w-72">Product Name</TableHead>
-          <TableHead>Sales</TableHead>
           <TableHead className="text-center">Total Revenue</TableHead>
+          <TableHead>Stock</TableHead>
           <TableHead className="text-center w-48">Status</TableHead>
         </TableRow>
       </TableHeader>

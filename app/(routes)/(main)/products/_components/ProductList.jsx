@@ -5,7 +5,7 @@ import ProductSkeleton from "@/components/Global/ProductSkelaton";
 import { v4 } from "uuid";
 import { getProduct } from "@/actions/queries";
 
-export default function ProductList({ children }) {
+export default function ProductList() {
   const { data, isFetched } = useQuery("product", getProduct);
 
   function mapProducts(prod) {
@@ -26,7 +26,7 @@ export default function ProductList({ children }) {
 
   return (
     <div>
-      {children}
+
       {isFetched ? data?.map(mapProducts) : <ProductSkeleton />}
     </div>
   );

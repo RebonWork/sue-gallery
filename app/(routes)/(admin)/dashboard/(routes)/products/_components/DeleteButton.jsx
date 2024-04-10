@@ -9,12 +9,26 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import axios from "axios";
+import { useQueryClient, useMutation } from "react-query";
 import { Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { deleteProduct } from "@/actions/queries";
 
 const DeleteButton = ({_id}) => {
-  async function deleteProduct(id) {
-    await axios.delete(`/api/product/${id}`);
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deleteProduct, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("product");
+    }
+  })
+  const router = useRouter();
+  async function handledeleteProduct(id) {
+    try {
+      await mutation.mutate(id);
+      router.push("/dashboard/products");
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <AlertDialog>

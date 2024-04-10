@@ -67,6 +67,7 @@ export default function CategoryOverview() {
   const customLegend = (props) => {
     const { payload } = props
 
+
     return (
       <div className="px-8">
         {payload.map((entry, index) => (
@@ -79,7 +80,8 @@ export default function CategoryOverview() {
               style={{ backgroundColor: entry.color }}
             />
             <h1 className="text-sm text-neutral-800">{entry.value}</h1>
-            <h1 className="text-sm text-neutral-500 mr-0 ml-auto">{parseFloat(Math.floor(entry.payload.percent*10000)/100).toFixed(2)}%</h1>
+            {/* <h1 className="text-sm text-neutral-500 mr-0 ml-auto">{parseFloat(Math.floor(entry.payload.percent*10000)/100).toFixed(2)}%</h1> */}
+            <h1 className="text-sm text-neutral-500 mr-0 ml-auto">${entry.payload.payload.payload.value}</h1>
           </div>
         ))}
       </div>

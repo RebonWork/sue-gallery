@@ -19,6 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export function AddNewCategoryForm() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const mutation = useMutation(addCategory, {
     onSuccess: () => {
       queryClient.invalidateQueries("category");
@@ -38,7 +39,7 @@ export function AddNewCategoryForm() {
     reset,
     formState: { isSubmitSuccessful },
   } = form;
-  const queryClient = useQueryClient();
+
 
   async function HandleSubmit(data) {
     await mutation.mutate(data);
