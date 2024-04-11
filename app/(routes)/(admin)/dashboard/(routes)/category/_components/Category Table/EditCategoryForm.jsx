@@ -4,12 +4,13 @@ import {
   FormItem,
   FormControl,
   FormMessage,
+  FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { FormLabel } from "@mui/material";
+
 
 const EditCategoryForm = ({ category, handelCategoryUpdate }) => {
   const schema = z.object({

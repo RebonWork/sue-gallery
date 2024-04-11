@@ -1,5 +1,5 @@
 "use client";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ShoppingCart } from "lucide-react";
 import LinkedText from "../LinkedText";
 import Logo from "../Logo";
 import ProfileButton from "./ProfileButton";
@@ -20,7 +20,7 @@ const Header = () => {
 
         <div className="items">
           <ProfileButton />
-          <ShoppingCartIcon />
+          <ShoppingCart />
         </div>
       </header>
     </SessionProvider>

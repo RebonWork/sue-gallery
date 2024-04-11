@@ -1,4 +1,4 @@
-import { DeleteForever } from '@mui/icons-material'
+
 import Image from 'next/image'
 
 const SingleProductImage = (props) => {

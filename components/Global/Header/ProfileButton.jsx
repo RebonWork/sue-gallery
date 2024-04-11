@@ -1,9 +1,9 @@
 "use client";
-import { getSessionServer } from "@/actions/serverActions";
-import PersonIcon from "@mui/icons-material/Person";
+
 import Link from "next/link";
 import ProfileDropdown from "./ProfileDropdown";
 import { SessionProvider, useSession } from "next-auth/react";
+import { User } from "lucide-react";
 const ProfileButton = () => {
   const {status} = useSession();
   return (
@@ -13,7 +13,7 @@ const ProfileButton = () => {
           <ProfileDropdown />
         ) : (
           <div>
-            <PersonIcon />
+            <User/>
             <Link href="/signin">Login/Register</Link>
           </div>
         )}

@@ -1,5 +1,5 @@
 "use client"
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import PersonIcon from "@mui/icons-material/Person";
+
 import { CircleUserRound } from "lucide-react";
 import SignOut from "@/app/(routes)/(auth)/_component/SignOut";
 import Link from "next/link";
@@ -18,7 +18,7 @@ const { data: session } = useSession();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <PersonIcon />
+        <User />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
