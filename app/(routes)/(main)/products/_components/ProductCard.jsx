@@ -5,6 +5,7 @@ import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 
 const ProductCard = ({ imageUrl, name, price, rating }) => {
+
   return (
     <div className="flex flex-col overflow-hidden p-2">
       <div className="overflow-hidden object-center rounded-sm w-[300px] h-[300px] ">

@@ -7,6 +7,7 @@ export default function Page() {
     <div className="flex flex-row">
       <CategoryList/>
       <ProductList />
+
     </div>
   );
 }

@@ -8,8 +8,8 @@ import { SessionProvider } from "next-auth/react";
 const Header = () => {
   return (
     <SessionProvider>
-      <header className="header">
-        <div className="items">
+      <header className="flex justify-between items-center px-8 py-3 bg-custom-primary-800">
+        <div className="flex gap-6 text-white">
           <LinkedText link="/" text="Home" />
           <LinkedText link="/products" text="Products" />
           <LinkedText link="/about" text="About" />
@@ -18,7 +18,7 @@ const Header = () => {
           <Logo />
         </div>
 
-        <div className="items">
+        <div className="flex gap-6 text-white">
           <ProfileButton />
           <ShoppingCart />
         </div>
