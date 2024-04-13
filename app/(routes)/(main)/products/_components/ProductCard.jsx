@@ -3,11 +3,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-const ProductCard = ({ imageUrl, name, price, rating }) => {
+const ProductCard = ({ imageUrl, name, price, rating, id}) => {
 
   return (
-    <div className="flex flex-col overflow-hidden p-2">
+    <Link href={`/products/${id}`} className="flex flex-col overflow-hidden p-2">
       <div className="overflow-hidden object-center rounded-sm w-[300px] h-[300px] ">
         <Image
           src={imageUrl}
@@ -36,7 +37,7 @@ const ProductCard = ({ imageUrl, name, price, rating }) => {
           </Button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

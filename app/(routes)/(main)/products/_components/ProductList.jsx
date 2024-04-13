@@ -7,10 +7,9 @@ import ProductCard from "./ProductCard";
 export default function ProductList() {
   const { data, isFetched } = useQuery("product", getProduct);
   const activeData = data?.filter((product) => product.isActive === true);
-
   function mapProducts(prod) {
     return (
-      <ProductCard key={v4()} imageUrl = {prod.cover.url} name = {prod.name} price = {prod.price} />
+      <ProductCard key={v4()} id = {prod._id} imageUrl = {prod.cover.url} name = {prod.name} price = {prod.price} />
     );
   }
 
