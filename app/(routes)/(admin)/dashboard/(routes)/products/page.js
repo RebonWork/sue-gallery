@@ -11,7 +11,7 @@ function Page() {
   const { data, isFetched } = useQuery("product", getProduct);
 
   return (
-    <div className="h-screen px-10 mt-6">
+    <div className="h-screen mt-6">
       <h1> All Products</h1>
       <Card className="mt-6 p-8">
         <CardContent>

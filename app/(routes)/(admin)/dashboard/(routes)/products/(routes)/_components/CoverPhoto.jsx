@@ -27,7 +27,7 @@ const CoverPhoto = (props) => {
     <>
       {props.coverData ? (
         <div className="flex flex-col justify-center items-center">
-          <div className=" flex justify-center items-center w-auto h-auto bg-white rounded-md shadow-sm border-1 border-slate-100 mt-3 object-cover overflow-hidden">
+          <div className=" flex justify-center items-center w-full h-full bg-white rounded-sm shadow-sm border-1 border-slate-100 mt-3 object-cover overflow-hidden">
             <Image
               src={props.coverData?.url}
               width={600}
@@ -38,7 +38,7 @@ const CoverPhoto = (props) => {
           <Button onClick={handleCoverDelete} variant="destructive" size="icon" className="w-full mt-2"><Trash2/></Button>
         </div>
       ) : (
-        <div className=" flex justify-center items-center w-72 h-72 bg-white rounded-md shadow-sm border-2 border-slate-100 mt-3">
+        <div className=" flex justify-center items-center w-full h-full bg-white rounded-sm shadow-sm border-2 border-slate-100 mt-3">
           {isUploading ? (
             <Spinner size="lg" color="default" labelColor="foreground" />
           ) : (

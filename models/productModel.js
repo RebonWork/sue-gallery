@@ -36,11 +36,6 @@ const productSchema = new Schema(
       type:String,
       required:true
     },
-    reviews:[{
-      userId:String,
-      comment:String,
-      rating:Number
-    }],
     isActive: {
       type: Boolean,
     }

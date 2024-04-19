@@ -63,19 +63,7 @@ const Page = ({ params: { productId } }) => {
                 <span className="px-2 text-neutral-400 text-lg">EGP</span>
               </h3>
               <span className="text-neutral-400 text-sm lg:text-medium px-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Morbi blandit cursus risus at ultrices mi tempus. Dictumst
-                quisque sagittis purus sit amet. Libero enim sed faucibus turpis
-                in eu.
-              </span>
-              <span className="text-neutral-400 text-sm lg:text-medium px-2">
-                Pellentesque eu tincidunt tortor aliquam nulla facilisi cras
-                fermentum. Integer eget aliquet nibh praesent tristique. Ut
-                consequat semper viverra nam. Elit at imperdiet dui accumsan sit
-                amet nulla. Sit amet est placerat in. Proin sagittis nisl
-                rhoncus mattis rhoncus urna neque viverra. Odio pellentesque
-                diam volutpat commodo.
+                {product.description}
               </span>
               <small>
                 Stock status :{" "}

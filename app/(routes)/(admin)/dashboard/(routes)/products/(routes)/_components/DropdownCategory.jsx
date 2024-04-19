@@ -23,13 +23,15 @@ const DropdownCategory = ({ defaultValue, onChange }) => {
 
   return (
     <>
-      <Select defaultValue={defaultValue} onValueChange={onChange}>
-        <SelectTrigger className="w-[180px]">
+      <Select
+        defaultValue={defaultValue}
+        onValueChange={onChange}
+        className="w-1/2 h-fit"
+      >
+        <SelectTrigger>
           <SelectValue placeholder="Select Category" />
         </SelectTrigger>
-        <SelectContent>
-          {isFetched && data?.map(handleData)}
-        </SelectContent>
+        <SelectContent>{isFetched && data?.map(handleData)}</SelectContent>
       </Select>
     </>
   );

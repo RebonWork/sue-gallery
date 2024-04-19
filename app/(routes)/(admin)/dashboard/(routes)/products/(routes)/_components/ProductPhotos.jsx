@@ -33,51 +33,49 @@ const ProductPhotos = (props) => {
   function handleImageData(images) {
     return (
       <div className="mb-6 flex flex-col">
-        <div className=" w-32 h-32 rounded-md border-1 border-slate-100 flex justify-center items-center object-cover overflow-hidden mt-3">
+        <div className=" w-28 h-28 rounded-md border-1 border-slate-100 flex justify-center items-center object-cover overflow-hidden">
           <SingleProductImage
             handleImageDelete={handleImageDelete}
             imageUrl={images.url}
             key={images.publicID}
           />
         </div>
-
         <Button
           onClick={() => handleImageDelete(images.publicID)}
           variant="destructive"
           size="icon"
-          className="w-full mt-2 h-auto p-1"
+          className="w-28 mt-2 h-auto p-1"
         >
           <Trash2 />
         </Button>
       </div>
     );
   }
+
   return (
     <>
-      <div>
-        {props.imagesData?.map(handleImageData)}
-        {isUploading &&
-          Array.from({ length: filesNum }).map((_item, index) => (
-            <div className="mb-6" key={index}>
-              <div className=" w-32 h-32 border-1 shadow-sm border-slate-100 flex justify-center items-center mt-3">
-                <Spinner size="lg" color="default" labelColor="foreground" />
-              </div>
+      {props.imagesData?.map(handleImageData)}
+      {isUploading &&
+        Array.from({ length: filesNum }).map((_item, index) => (
+          <div className="mb-6" key={index}>
+            <div className=" w-28 h-28 border-1 shadow-sm border-slate-100 flex justify-center items-center">
+              <Spinner size="lg" color="default" labelColor="foreground" />
             </div>
-          ))}
-        <div className=" w-32 h-32 border-1 shadow-sm border-slate-100 flex justify-center items-center mt-3">
-          <label htmlFor="product-image">
-            <PlusCircle className="add-icon clickable" />
-          </label>
-          <input
-            type="file"
-            id="product-image"
-            style={{ display: "none" }}
-            name="image"
-            accept="image/*"
-            onChange={handleUpload}
-            multiple
-          />
-        </div>
+          </div>
+        ))}
+      <div className=" flex justify-center items-center h-28 w-28 border-1 shadow-sm border-slate-100 ">
+        <label htmlFor="product-image">
+          <PlusCircle className="add-icon clickable" />
+        </label>
+        <input
+          type="file"
+          id="product-image"
+          style={{ display: "none" }}
+          name="image"
+          accept="image/*"
+          onChange={handleUpload}
+          multiple
+        />
       </div>
     </>
   );
