@@ -24,7 +24,7 @@ const EditCategoryForm = ({ category, handelCategoryUpdate }) => {
     },
   });
   return (
-    <Form {...form}>
+<Form {...form}>
       <form
         id="edit-category"
         onSubmit={form.handleSubmit(handelCategoryUpdate)}

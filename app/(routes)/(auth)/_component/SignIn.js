@@ -1,6 +1,5 @@
 "use client";
 import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Card,
   CardContent,
@@ -9,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { SubmitFormButton } from "../../(admin)/dashboard/(routes)/products/(routes)/_components/SubmitFormButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -19,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { EmailInputField } from "./EmailInputField";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import {Loader2} from "lucide-react";
 
 const SignIn = ({ callbackUrl }) => {
   const router = useRouter();
@@ -81,9 +80,22 @@ const SignIn = ({ callbackUrl }) => {
             </Form>
           </CardContent>
           <CardFooter>
-            <SubmitFormButton isSubmitting={isSubmitting} formId="login-form">
-              Sign In
-            </SubmitFormButton>
+            <Button
+                disabled={isSubmitting || isValid === false}
+                type="submit"
+                className="w-full"
+                htmlType="submit"
+                form="login-form"
+            >
+              {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+                    Please wait
+                  </>
+              ) : (
+                  "Submit"
+              )}
+            </Button>
           </CardFooter>
         </Card>
       </div>

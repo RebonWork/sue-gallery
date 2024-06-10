@@ -23,8 +23,13 @@ import {
 } from "@/components/ui/table";
 import {Plus } from "lucide-react";
 import Link from "next/link";
+import {useQuery} from "react-query";
+import {getProduct} from "@/actions/queries";
 
-export function ProductTable({data, isFetched}) {
+export function ProductTable() {
+  const { data: fetchedData , isFetched } = useQuery("product", getProduct);
+  const data = isFetched && fetchedData
+  // console.log(isGot? products: null);
   const [sorting, setSorting] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
   const [rowSelection, setRowSelection] = React.useState({});

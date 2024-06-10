@@ -12,9 +12,9 @@ const ProfileButton = () => {
         {status === "authenticated" ? (
           <ProfileDropdown />
         ) : (
-          <div>
+          <div className={"flex gap-x-4"}>
             <User/>
-            <Link href="/signin">Login/Register</Link>
+            <Link href={"/signin"}>Login/Register</Link>
           </div>
         )}
       </div>
